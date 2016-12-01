@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+@import "common/layout.css";
+
+/*-------------------------------------------------------------------------
+	Bread
+/*-----------------------------------------------------------------------*/
+#bread {
+	margin-bottom:40px;
+}
+
+/*-------------------------------------------------------------------------
+	Main
+/*-----------------------------------------------------------------------*/
+#main {
+	margin-bottom:10px;
+}
+	
+	#main section {
+		float:left;
+		width:30%;
+		margin:0 3% 40px 0;
+	}
+	
+		#main section h2 {
+			margin-bottom:30px;
+			border-bottom:2px solid #333;
+			font-size:24px;
+		}
+		
+		#main section ol {
+		}
+		
+			#main section ol li {
+				margin-bottom:20px;
+				font-size:18px;
+			}
+			
+				#main section ol li span {
+					float:left;
+					width:64%;
+				}
+			
+				#main section ol li span.num {
+					width:12%;
+				}
+				
+				#main section ol li span.team:after {
+					content:"チーム";
+				}
+				
+				#main section ol li span.day:after {
+					content:"曜日";
+				}
+				
+				#main section ol li span.hour:after {
+					content:"時台";
+				}
+				
+				#main section ol li span.length:after {
+					content:"文字程度";
+				}
+				
+				#main section ol li span.star {
+					width:24%;
+					text-align:right;
+				}
+				
+				#main section ol li span.star:after {
+					content:"★";
+				}
+				
+	#main hr {
+		clear:both;
+		visibility:hidden;
+	}
+
+/*-------------------------------------------------------------------------
+	Report
+/*-----------------------------------------------------------------------*/
+#report {
+}
+
+	#report span {
+		font-size:16px;
+	}
+	
+	#report span.date {
+		width:28%;
+	}
+	
+	#report span.name {
+		width:36%;
+	}
+	
+	#report span.note {
+		display:block;
+		overflow-y:auto;
+		width:100%;
+		height:1.8em;
+		font-size:12px;
+		text-align:justify;
+		letter-spacing:-1px;
+	}

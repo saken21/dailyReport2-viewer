@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+/**
+* ================================================================================
+*
+* base.css
+* version: 1.03
+* Author : KENTA SAKATA
+* Since  : 2010/01/06
+* Update : 2012/04/30
+*
+* ================================================================================
+*
+**/
+
+/*-------------------------------------------------------------------------
+	Init
+/*-----------------------------------------------------------------------*/
+* {
+	margin:0;
+	padding:0;
+}
+
+html {
+	overflow-y:scroll;
+	word-break:break-all;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+
+ol, ul {
+	list-style:none;
+}
+
+blockquote, q {
+	quotes:none;
+}
+
+:focus {
+	outline:0;
+}
+
+ins {
+	text-decoration:none;
+}
+
+del {
+	text-decoration:line-through;
+}
+
+table {
+	
+}
+
+img {
+	border:0;
+	vertical-align:bottom;
+}
+
+address {
+	font-style:normal;
+}
+
+/*-------------------------------------------------------------------------
+	Setup
+/*-----------------------------------------------------------------------*/
+body {
+	color:#333;
+	font-size:12px;
+	font-family:"Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+p, li, dt, dl {
+	line-height:1.6;
+	letter-spacing:0.5px;
+}
+
+strong {
+	font-weight:bold;
+}
+
+em {
+	font-style:normal;
+}
+
+/*-------------------------------------------------------------------------
+	Anchor
+/*-----------------------------------------------------------------------*/
+a:link {
+	color:#615de7;
+	text-decoration:none;
+}
+
+a:visited {
+	color:#615de7;
+	text-decoration:none;
+}
+
+a:hover {
+	color:#8784f0;
+	text-decoration:none;
+}
+
+/*-------------------------------------------------------------------------
+	Clearfix
+/*-----------------------------------------------------------------------*/
+div,ul,dl,p,section,article,header,nav,li {
+	zoom:1;
+}
+	
+	div:after,
+	ul:after,
+	dl:after,
+	p:after,
+	section:after,
+	article:after,
+	header:after,
+	nav:after,
+	li:after {
+		content:"";
+		display: block;
+		clear:both;
+		visibility:hidden;
+	}

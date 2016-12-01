@@ -1,0 +1,223 @@
+@charset "UTF-8";
+
+@import "base.css";
+@import "lightbox.css";
+
+/*-------------------------------------------------------------------------
+	All
+/*-----------------------------------------------------------------------*/
+#all {
+	padding-top:85px;
+}
+
+	#all .wrap {
+		width:90%;
+		max-width:1400px;
+		margin:0 auto;
+	}
+	
+	#all .hidden {
+		display:none;
+	}
+
+/*-------------------------------------------------------------------------
+	Form
+/*-----------------------------------------------------------------------*/
+#all input,
+#all textarea {
+	resize:none;
+	padding:2px 5px;
+	border:1px solid #ddd;
+	background:#fafafa;
+	font-size:11px;
+	color:#ccc;
+}
+
+#all input {
+	line-height:1.8;
+}
+
+#all input:focus,
+#all textarea:focus {
+	color:#333;
+}
+
+#all .submit {
+	padding:10px 40px;
+	border:1px solid #ddd;
+	background:#eee;
+	text-align:center;
+	cursor:pointer;
+}
+
+#all .submit:hover {
+	background-color:#f2f6fa;
+}
+
+#all .submit.updating {
+	background-color:#aad0f7;
+}
+
+#all button {
+	cursor:pointer;
+}
+
+#form-update {
+	width:100%;
+}
+	
+/*-------------------------------------------------------------------------
+	Header
+/*-----------------------------------------------------------------------*/
+#header {
+	position:fixed;
+	left:0;
+	top:0;
+	width:100%;
+	padding:20px 0;
+	border-top:3px solid #cedeec;
+	border-bottom:1px solid #eee;
+	background:#fff;
+	z-index:100;
+}
+
+	#header h1 {
+		float:left;
+		font-size:14px;
+	}
+	
+		#header h1 a {
+			color:#333;
+		}
+	
+		#header h1 strong {
+			margin-right:30px;
+			font-size:28px;
+			letter-spacing:1px;
+		}
+		
+		#header h1 em {
+			display:inline-block;
+		}
+		
+	#header-navi {
+		float:right;
+	}
+	
+		#header-navi ul {
+			position:relative;
+			top:10px;
+			margin-right:-10px;
+		}
+		
+			#header-navi ul li {
+				display:inline;
+				float:left;
+				margin-right:10px;
+				cursor:pointer;
+			}
+			
+				#header-navi ul li a {
+					display:block;
+					padding:5px 19px 5px 29px;
+					border:2px solid #ddd;
+					background:#fff no-repeat 9px center;
+					color:#333;
+				}
+			
+				#header-navi ul li a:hover {
+					background-color:#f2f6fa;
+				}
+				
+				#header-navi ul li a.active {
+					padding:6px 20px 6px 30px;
+					border-width:1px;
+					background-color:#eee;
+					background-position:10px center;
+				}
+				
+				#header-navi ul li a.star,
+				#header-navi ul li a.analytics {
+					padding-left:19px;
+				}
+				
+				#header-navi ul li a.read {
+					background-image:url(../../img/read.png);
+				}
+				
+				#header-navi ul li a.edit {
+					background-image:url(../../img/edit.png);
+				}
+			
+/*-------------------------------------------------------------------------
+	Bread
+/*-----------------------------------------------------------------------*/
+#bread {
+	margin-bottom:30px;
+	padding:5px 0;
+	background:#f2f6fa;
+}
+
+/*-------------------------------------------------------------------------
+	Main
+/*-----------------------------------------------------------------------*/
+#main {
+	position:relative;
+	min-height:300px;
+	margin-bottom:50px;
+}
+
+/*-------------------------------------------------------------------------
+	Login
+/*-----------------------------------------------------------------------*/
+#login {
+	padding:30px 0;
+	text-align:center;
+}
+
+	#login label {
+		margin-right:10px;
+	}
+	
+	#login input {
+		margin-right:30px;
+		color:#333;
+	}
+		
+/*-------------------------------------------------------------------------
+	Footer
+/*-----------------------------------------------------------------------*/
+#footer {
+	position:relative;
+	padding:10px 0;
+}
+
+	#footer p {
+		display:block;
+	}
+
+	#footer .author {
+		color:#ddd;
+		font-size:9px;
+	}
+	
+	#pagetop {
+		position:fixed;
+		right:20px;
+		bottom:20px;
+	}
+	
+		#pagetop a {
+			display:block;
+			padding:20px;
+			border:1px solid #ccc;
+			background:#eee;
+			color:#aaa;
+			font-size:8px;
+			line-height:1;
+			cursor:pointer;
+		}
+		
+		#pagetop a:hover {
+			color:#888;
+		}
