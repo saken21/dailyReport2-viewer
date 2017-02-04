@@ -1,6 +1,7 @@
 package view.reportviewer;
 
-import js.JQuery;
+import js.jquery.JQuery;
+import js.jquery.Event;
 
 class SearchNavi {
 	
@@ -31,7 +32,7 @@ class SearchNavi {
 		/* =======================================================================
 		Public - Clear
 		========================================================================== */
-		public static function clear(event:JqEvent = null):Void {
+		public static function clear(event:Event = null):Void {
 
 			_jInput.prop('value','');
 
@@ -40,12 +41,12 @@ class SearchNavi {
 	/* =======================================================================
 	On Keydown
 	========================================================================== */
-	private static function onKeydown(event:JqEvent):Void {
+	private static function onKeydown(event:Event):Void {
 		
 		if (event.keyCode == 13) {
 			
 			ReportViewer.search(_jInput.prop('value'));
-			return untyped false;
+			event.preventDefault();
 			
 		}
 		

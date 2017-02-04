@@ -1,4 +1,4 @@
 -cp src
--cp ../../../haxe/
+-cp /Volumes/LACIE/Document/Library/Haxe/
 -main Main
 -js html/files/js/index.js

@@ -1,8 +1,10 @@
 package view.reportviewer;
 
-import js.JQuery;
-import jp.saken.utils.Dom;
-import jp.saken.utils.Ajax;
+import js.Browser;
+import js.jquery.JQuery;
+import js.jquery.Event;
+import jp.saken.js.utils.Ajax;
+import jp.saken.js.utils.Handy;
 
 class Task {
 	
@@ -32,11 +34,11 @@ class Task {
 		
 		_jParent.on({
 			
-			getWorkID : function(event:JqEvent):Void {
+			getWorkID : function(event:Event):Void {
 				update();
 			},
 			
-			getClientID : function(event:JqEvent):Void {
+			getClientID : function(event:Event):Void {
 				judgeIsEmpty('works',_workName,'案件');
 			}
 			
@@ -69,10 +71,8 @@ class Task {
 	========================================================================== */
 	private function addData(table:String,name:String,string:String):Void {
 		
-		var isOK:Bool = Dom.window.confirm(string + 'に「' + name + '」を追加しますか？');
-		
-		if (isOK) {
-			
+		Handy.confirm(string + 'に「' + name + '」を追加しますか？',function():Void {
+
 			var columns:Array<String>  = [];
 			var values :Array<Dynamic> = [];
 			
@@ -91,12 +91,12 @@ class Task {
 			Ajax.insertData(table,columns,values,function(lastID:Int):Void {
 				getData(table,name);
 			});
-			
-		} else {
-			
+
+		},function():Void {
+
 			ReportEditor.cancel();
-			
-		}
+
+		});
 		
 	}
 	

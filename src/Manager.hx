@@ -1,10 +1,11 @@
 package;
 
-import js.JQuery;
-import jp.saken.utils.UI;
-import jp.saken.utils.Ajax;
-import jp.saken.utils.Handy;
-import jp.saken.utils.Dom;
+import js.Browser;
+import js.jquery.JQuery;
+import js.jquery.Event;
+import jp.saken.js.ui.UI;
+import jp.saken.js.utils.Ajax;
+import jp.saken.common.utils.Handy;
 import view.*;
 import db.*;
 import ui.*;
@@ -12,6 +13,7 @@ import utils.*;
  
 class Manager {
 	
+	private static var _jWindow  :JQuery;
 	private static var _isLogined:Bool;
 	
 	public static var myID         :Int;
@@ -25,7 +27,9 @@ class Manager {
 	/* =======================================================================
 	Public - Init
 	========================================================================== */
-	public static function init(event:JqEvent):Void {
+	public static function init(event:Event):Void {
+
+		_jWindow = new JQuery(Browser.window);
 		
 		Login.init();
 		SimpleBoard.init();
@@ -39,6 +43,15 @@ class Manager {
 		Login.start();
 		
 	}
+
+		/* =======================================================================
+		Public - Get JQuery Window
+		========================================================================== */
+		public static function jWindow():JQuery {
+			
+			return _jWindow;
+
+		}
 	
 		/* =======================================================================
 		Public - Login
@@ -89,9 +102,9 @@ class Manager {
 	/* =======================================================================
 	Load DB
 	========================================================================== */
-	private static function loadDB(onLoaded:JqEvent->Void):Void {
+	private static function loadDB(onLoaded:Event->Void):Void {
 		
-		Dom.jWindow.on('loadDB',onLoaded);
+		_jWindow.on('loadDB',onLoaded);
 		
 		Members.load();
 		Tasks.load(pastDate);
@@ -103,9 +116,9 @@ class Manager {
 	/* =======================================================================
 	On Loaded DB
 	========================================================================== */
-	private static function onLoadedDB(event:JqEvent):Void {
+	private static function onLoadedDB(event:Event):Void {
 		
-		Dom.jWindow.unbind('loadDB',onLoadedDB);
+		_jWindow.unbind('loadDB',onLoadedDB);
 		
 		_isLogined = true;
 

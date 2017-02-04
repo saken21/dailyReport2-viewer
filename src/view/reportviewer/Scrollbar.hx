@@ -1,7 +1,7 @@
 package view.reportviewer;
 
-import js.JQuery;
-import jp.saken.utils.Dom;
+import js.jquery.JQuery;
+import js.jquery.Event;
  
 class Scrollbar {
 	
@@ -13,18 +13,18 @@ class Scrollbar {
 	public static function init(jTarget:JQuery):Void {
 		
 		_jTarget = jTarget;
-		Dom.jWindow.on('scroll',onScroll);
+		Manager.jWindow().on('scroll',onScroll);
 		
 	}
 	
 	/* =======================================================================
 	On Scroll
 	========================================================================== */
-	private static function onScroll(event:JqEvent):Void {
+	private static function onScroll(event:Event):Void {
 		
-		var y:Int = Dom.jWindow.scrollTop();
-		var t:Int = _jTarget.position().top + _jTarget.height();
-		var h:Int =  _jTarget.find('.report').first().height();
+		var y:Float = Manager.jWindow().scrollTop();
+		var t:Float = _jTarget.position().top + _jTarget.height();
+		var h:Float =  _jTarget.find('.report').first().height();
 		
 		if (y - t > 100 - h * 2) ReportViewer.loadMore();
 		

@@ -1,7 +1,7 @@
 package ui;
 
-import js.JQuery;
-import jp.saken.utils.API;
+import js.jquery.JQuery;
+import jp.saken.common.utils.API;
  
 class Datalist {
 	

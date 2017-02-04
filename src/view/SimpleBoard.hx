@@ -1,10 +1,10 @@
 package view;
 
 import js.Browser;
-import js.JQuery;
-import jp.saken.utils.Handy;
-import jp.saken.utils.Dom;
-import jp.saken.utils.Ajax;
+import js.jquery.JQuery;
+import js.jquery.Event;
+import jp.saken.common.utils.Handy;
+import jp.saken.js.utils.Ajax;
 import db.Members;
 
 class SimpleBoard {
@@ -13,8 +13,8 @@ class SimpleBoard {
 	private static var _jNewentry     :JQuery;
 	private static var _jTextarea     :JQuery;
 	private static var _jEntries      :JQuery;
-	private static var _defNewentryH  :Int;
-	private static var _curNewentryH  :Int;
+	private static var _defNewentryH  :Float;
+	private static var _curNewentryH  :Float;
 	private static var _lastUpdatetime:String;
 	private static var _checkList     :Array<Array<Int>>;
 	
@@ -73,7 +73,7 @@ class SimpleBoard {
 	/* =======================================================================
 	On Click
 	========================================================================== */
-	private static function onClick(event:JqEvent):Void {
+	private static function onClick(event:Event):Void {
 		
 		var jTarget:JQuery = new JQuery(event.target);
 		var jParant:JQuery = jTarget.parents('.entry');
@@ -86,7 +86,7 @@ class SimpleBoard {
 	/* =======================================================================
 	On Keydown
 	========================================================================== */
-	private static function onKeydown(event:JqEvent):Void {
+	private static function onKeydown(event:Event):Void {
 		
 		var text :String = _jTextarea.prop('value');
 		var lines:Int    = Handy.getLines(text);
@@ -106,7 +106,7 @@ class SimpleBoard {
 				addEntry(text);
 				_jTextarea.prop('value','');
 
-				return untyped false;
+				event.preventDefault();
 				
 			}
 			
@@ -117,7 +117,7 @@ class SimpleBoard {
 	/* =======================================================================
 	Set Newentry Height
 	========================================================================== */
-	private static function setNewentryHeight(value:Int):Void {
+	private static function setNewentryHeight(value:Float):Void {
 		
 		_curNewentryH = value;
 		_jNewentry.height(value);
@@ -205,8 +205,8 @@ class SimpleBoard {
 	========================================================================== */
 	private static function deleteEntry(jTarget:JQuery):Void {
 		
-		var text:String = Handy.getLimitText(jTarget.find('.text').text());
-		var isOK:Bool   = Dom.window.confirm('「' + text + '」を削除してもよろしいですか？');
+		var text:String = Handy.getLimitedText(jTarget.find('.text').text());
+		var isOK:Bool   = Browser.window.confirm('「' + text + '」を削除してもよろしいですか？');
 		
 		if (!isOK) return;
 		

@@ -1,8 +1,8 @@
 package view;
 
-import js.JQuery;
-import jp.saken.utils.Ajax;
-import jp.saken.utils.Dom;
+import js.jquery.JQuery;
+import js.jquery.Event;
+import jp.saken.js.utils.Ajax;
 import db.Members;
 import utils.Data;
 import view.reportviewer.Html;
@@ -70,7 +70,7 @@ class Information {
 	/* =======================================================================
 	On Click
 	========================================================================== */
-	private static function onClick(event:JqEvent):Void {
+	private static function onClick(event:Event):Void {
 		
 		Manager.reload();
 		

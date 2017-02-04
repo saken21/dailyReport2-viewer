@@ -1,8 +1,8 @@
 package view;
 
-import js.JQuery;
-import jp.saken.utils.Ajax;
-import jp.saken.utils.Dom;
+import js.jquery.JQuery;
+import js.jquery.Event;
+import jp.saken.js.utils.Ajax;
 import db.Members;
 import utils.Data;
 import view.reportviewer.SortNavi;
@@ -25,7 +25,7 @@ class StarChecker {
 	========================================================================== */
 	public static function init():Void {
 		
-		Dom.jWindow.on('click',onClickWindow);
+		Manager.jWindow().on('click',onClickWindow);
 		
 		_jParent  = new JQuery('#starchecker').on('click',onClick);
 		_jContent = _jParent.find('#starchecker-content');
@@ -164,7 +164,7 @@ class StarChecker {
 	/* =======================================================================
 	On Click
 	========================================================================== */
-	private static function onClick(event:JqEvent):Void {
+	private static function onClick(event:Event):Void {
 		
 		if (!_jParent.hasClass('no-checked')) return;
 		
@@ -178,7 +178,7 @@ class StarChecker {
 	/* =======================================================================
 	On Click Window
 	========================================================================== */
-	private static function onClickWindow(event:JqEvent):Void {
+	private static function onClickWindow(event:Event):Void {
 		
 		var jTarget:JQuery = new JQuery(event.target);
 		if (jTarget.parents('#starchecker').length > 0) return;

@@ -1,6 +1,7 @@
 package view.reportviewer;
 
-import js.JQuery;
+import js.jquery.JQuery;
+import js.jquery.Event;
 
 class SortNavi {
 	
@@ -36,7 +37,7 @@ class SortNavi {
 	/* =======================================================================
 	On Mousedown
 	========================================================================== */
-	private static function onMousedown(event:JqEvent):Void {
+	private static function onMousedown(event:Event):Void {
 		
 		var jTarget:JQuery = new JQuery(event.target);
 		if (jTarget.hasClass('active')) return;

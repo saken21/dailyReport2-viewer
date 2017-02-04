@@ -1,9 +1,10 @@
 package view.reportviewer;
 
-import js.JQuery;
-import jp.saken.utils.Handy;
-import jp.saken.utils.Dom;
-import jp.saken.utils.Ajax;
+import js.Browser;
+import js.jquery.JQuery;
+import js.jquery.Event;
+import jp.saken.common.utils.Handy;
+import jp.saken.js.utils.Ajax;
 import utils.Data;
 
 class ReportEditor {
@@ -28,7 +29,7 @@ class ReportEditor {
 			
 			if (_isUpdating) {
 				
-				Dom.window.alert('更新中です。');
+				Browser.window.alert('更新中です。');
 				return;
 				
 			}
@@ -39,7 +40,7 @@ class ReportEditor {
 			
 			if (!getIsFull()) {
 				
-				Dom.window.alert('空欄があります。');
+				Browser.window.alert('空欄があります。');
 				return;
 				
 			}
@@ -49,8 +50,6 @@ class ReportEditor {
 			
 			updateTasks();
 			updateImages();
-			
-			AutoSave.unsetData(jParent);
 
 		}
 		
@@ -91,10 +90,15 @@ class ReportEditor {
 				
 				var jTask  :JQuery = _jTaskList.eq(p);
 				var isEmpty:Bool   = true;
+				var jInputs:JQuery = jTask.find('input');
 
-				jTask.find('input').each(function():Void {
-					if (JQuery.cur.prop('value').length  > 0) isEmpty = false;
-				});
+				for (i in 0...jInputs.length) {
+
+					if (jInputs.eq(i).prop('value').length  > 0) {
+						isEmpty = false;
+					}
+
+				}
 
 				if (isEmpty) jTask.remove();
 				
@@ -104,11 +108,16 @@ class ReportEditor {
 		
 		_jTaskList = _jTasks.find('.task');
 		
-		var isFull:Bool = true;
-		
-		_jTaskList.find('input').each(function():Void {
-			if (JQuery.cur.prop('value').length == 0) isFull = false;
-		});
+		var isFull :Bool   = true;
+		var jInputs:JQuery = _jTaskList.find('input');
+
+		for (i in 0...jInputs.length) {
+
+			if (jInputs.eq(i).prop('value').length == 0) {
+				isFull = false;
+			}
+
+		}
 		
 		return isFull;
 		
@@ -121,7 +130,7 @@ class ReportEditor {
 		
 		var counter:Int = _jTaskList.length;
 		
-		function onUpdated(event:JqEvent):Void {
+		function onUpdated(event:Event):Void {
 			
 			counter--;
 			if (counter == 0) updateData();
@@ -241,6 +250,8 @@ class ReportEditor {
 		
 		_jParent.stop().removeClass(classes).animate({ width:READ_MODE_WIDTH }, 300);
 		_jParent.find('article').stop().animate({ opacity:1 }, 1000);
+
+		AutoSave.unsetData(_jParent);
 		
 	}
 	

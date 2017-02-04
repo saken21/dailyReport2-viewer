@@ -1,10 +1,11 @@
 package view;
 
 import haxe.Json;
-import js.JQuery;
 import js.Cookie;
-import jp.saken.utils.Ajax;
-import jp.saken.utils.Dom;
+import js.jquery.JQuery;
+import js.jquery.Event;
+import jp.saken.js.utils.Ajax;
+import jp.saken.js.utils.Handy;
  
 class Login {
 	
@@ -72,7 +73,7 @@ class Login {
 	/* =======================================================================
 	Submit
 	========================================================================== */
-	private static function submit(event:JqEvent = null):Void {
+	private static function submit(event:Event = null):Void {
 		
 		var id     :String        = _jID.prop('value');
 		var pass   :String        = _jPass.prop('value');
@@ -84,7 +85,7 @@ class Login {
 		var where:String = '(parmanent_number = "' + id + '" OR parmanent_id = "' + id + '") AND pass = "' + pass + '"';
 		Ajax.getData(table,columns,checkData,where);
 		
-		return untyped false;
+		if (event != null) event.preventDefault();
 		
 	}
 	
@@ -95,7 +96,7 @@ class Login {
 		
 		if (data.length == 0) {
 			
-			Dom.window.alert('登録されていないアカウントです。');
+			Handy.alert('登録されていないアカウントです。');
 			return;
 			
 		}

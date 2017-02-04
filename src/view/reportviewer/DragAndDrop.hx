@@ -1,10 +1,11 @@
 package view.reportviewer;
 
-import js.JQuery;
+import js.jquery.JQuery;
+import js.jquery.Event;
 import js.html.FileReader;
 import js.html.Blob;
 import js.html.Image;
-import jp.saken.utils.Dom;
+import jp.saken.js.utils.Handy;
 
 class DragAndDrop {
 	
@@ -35,7 +36,7 @@ class DragAndDrop {
 	/* =======================================================================
 	On Drop
 	========================================================================== */
-	private function onDrop(event:JqEvent):Void {
+	private function onDrop(event:Event):Void {
 		
 		var file:Blob = untyped event.originalEvent.dataTransfer.files[0];
 		var fileReader:FileReader = new FileReader();
@@ -52,7 +53,7 @@ class DragAndDrop {
 		_jParent.removeClass('dragging');
 		cancel(event);
 		
-		return untyped false;
+		event.preventDefault();
 		
 	}
 	
@@ -68,7 +69,7 @@ class DragAndDrop {
 			
 			if (image.width > MAX_IMAGE_WIDTH || image.height > MAX_IMAGE_HEIGHT) {
 
-				Dom.window.alert('ファイルサイズが大き過ぎます。\nリサイズして再度お試しください。');
+				Handy.alert('ファイルサイズが大き過ぎます。\nリサイズして再度お試しください。');
 				return;
 
 			}
@@ -85,47 +86,41 @@ class DragAndDrop {
 	/* =======================================================================
 	On Drop
 	========================================================================== */
-	private function onEnter(event:JqEvent):Void {
+	private function onEnter(event:Event):Void {
 		
 		_onInner = true;
 		cancel(event);
-		
-		return untyped false;
 		
 	}
 	
 	/* =======================================================================
 	On Drop
 	========================================================================== */
-	private function onOver(event:JqEvent):Void {
+	private function onOver(event:Event):Void {
 		
 		_onInner = false;
 		_jParent.addClass('dragging');
 		
 		cancel(event);
 		
-		return untyped false;
-		
 	}
 	
 	/* =======================================================================
 	On Leave
 	========================================================================== */
-	private function onLeave(event:JqEvent):Void {
+	private function onLeave(event:Event):Void {
 		
 		if (_onInner) _onInner = false;
 		else _jParent.removeClass('dragging');
 		
 		cancel(event);
 		
-		return untyped false;
-		
 	}
 	
 	/* =======================================================================
 	On Drop
 	========================================================================== */
-	private function cancel(event:JqEvent):Void {
+	private function cancel(event:Event):Void {
 		
 		event.preventDefault();
 		event.stopPropagation();

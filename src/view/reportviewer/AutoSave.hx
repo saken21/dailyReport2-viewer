@@ -1,9 +1,9 @@
 package view.reportviewer;
 
-import js.JQuery;
+import js.jquery.JQuery;
 import js.html.Image;
-import jp.saken.utils.Ajax;
-import jp.saken.utils.Handy;
+import jp.saken.js.utils.Ajax;
+import jp.saken.common.utils.Handy;
  
 class AutoSave {
 	
@@ -87,17 +87,18 @@ class AutoSave {
 	private static function getTasks(jReport:JQuery):String {
 		
 		var array:Array<String> = [];
-		
-		jReport.find('.tasks').find('.task').each(function():Void {
+		var jTasks:JQuery = jReport.find('.tasks').find('.task');
 
-			var jTarget:JQuery = JQuery.cur;
+		for (i in 0...jTasks.length) {
+
+			var jTarget:JQuery = jTasks.eq(i);
 			var client :String = jTarget.find('.client').find('input').prop('value');
 			var work   :String = jTarget.find('.work').find('input').prop('value');
 			var hour   :Float  = jTarget.find('.hour').find('input').prop('value');
 
 			array.push(client + ',' + work + ',' + hour);
 
-		});
+		}
 		
 		return array.join('\n');
 		
@@ -109,16 +110,17 @@ class AutoSave {
 	private static function getImages(jReport:JQuery):String {
 		
 		var array:Array<String> = [];
+		var jList:JQuery = jReport.find('.image').find('figure').find('span').filter(':visible');
 
-		jReport.find('.image').find('figure').find('span').filter(':visible').each(function():Void {
+		for (i in 0...jList.length) {
 
-			var jTarget :JQuery = JQuery.cur;
+			var jTarget :JQuery = jList.eq(i);
 			var filename:String = jTarget.data('filename');
 			var src     :String = jTarget.find('img').prop('src');
 
 			array.push(filename + '#-----#' + src);
 
-		});
+		}
 		
 		return array.join('\n');
 		

@@ -1,7 +1,7 @@
 package ui;
 
-import js.JQuery;
-import jp.saken.utils.Dom;
+import js.jquery.JQuery;
+import js.jquery.Event;
 import view.ReportViewer;
  
 class Keyboard {
@@ -11,14 +11,14 @@ class Keyboard {
 	========================================================================== */
 	public static function init():Void {
 		
-		Dom.jWindow.on('keydown',onKeydown);
+		Manager.jWindow().on('keydown',onKeydown);
 		
 	}
 	
 	/* =======================================================================
 	On Keydown
 	========================================================================== */
-	private static function onKeydown(event:JqEvent):Void {
+	private static function onKeydown(event:Event):Void {
 		
 		var jTarget:JQuery = new JQuery(event.target);
 		var keyCode:Int    = event.keyCode;
@@ -34,7 +34,7 @@ class Keyboard {
 				case 65,68 : { // [A][D]
 					
 					ReportViewer.archiveAll();
-					return untyped false;
+					event.preventDefault();
 				
 				}
 				

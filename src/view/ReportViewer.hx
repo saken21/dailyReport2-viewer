@@ -1,10 +1,10 @@
 package view;
 
 import haxe.Json;
-import js.JQuery;
-import jp.saken.ui.Lightbox;
-import jp.saken.utils.Handy;
-import jp.saken.utils.Ajax;
+import js.jquery.JQuery;
+import js.jquery.Event;
+import jp.saken.js.components.Lightbox;
+import jp.saken.js.utils.Ajax;
 import db.Members;
 import db.Tasks;
 import db.Clients;
@@ -166,16 +166,17 @@ class ReportViewer {
 		========================================================================== */
 		public static function setTotaltime(jReport:JQuery):Void {
 
-			var totaltime:Float = 0;
+			var totaltime:Float  = 0;
+			var jTasks   :JQuery = jReport.find('.tasks').find('.task');
 
-			jReport.find('.tasks').find('.task').each(function():Void {
-				
-				var value:String = JQuery.cur.find('.hour').find('input').prop('value');
+			for (i in 0...jTasks.length) {
+
+				var value:String = jTasks.eq(i).find('.hour').find('input').prop('value');
 				if (value.length == 0) value = '0';
 				
 				totaltime += Std.parseFloat(value);
-				
-			});
+
+			}
 
 			totaltime = Math.ceil((totaltime * 10)) / 10;
 			jReport.find('.totaltime').find('span').text(Std.string(totaltime));
@@ -429,7 +430,7 @@ class ReportViewer {
 	/* =======================================================================
 	On Click
 	========================================================================== */
-	private static function onClick(event:JqEvent):Void {
+	private static function onClick(event:Event):Void {
 		
 		var jTarget:JQuery = new JQuery(event.target);
 		var jReport:JQuery = jTarget.parents('.report');
@@ -451,7 +452,7 @@ class ReportViewer {
 	/* =======================================================================
 	On Keyup
 	========================================================================== */
-	private static function onKeyup(event:JqEvent):Void {
+	private static function onKeyup(event:Event):Void {
 		
 		var jTarget:JQuery = new JQuery(event.target);
 		var keyCode:Int    = event.keyCode;
@@ -479,7 +480,7 @@ class ReportViewer {
 	/* =======================================================================
 	On Change
 	========================================================================== */
-	private static function onChange(event:JqEvent):Void {
+	private static function onChange(event:Event):Void {
 		
 		var jTarget:JQuery = new JQuery(event.target);
 		

@@ -1,11 +1,11 @@
 /**
 * ================================================================================
 *
-* Daily Report ver 2.01.03
+* Daily Report ver 2.01.04
 *
 * Author : KENTA SAKATA
 * Since  : 2013/05/14
-* Update : 2016/08/19
+* Update : 2017/02/04
 *
 * Licensed under the MIT License
 * Copyright (c) Kenta Sakata
@@ -16,7 +16,7 @@
 **/
 package;
 
-import js.JQuery;
+import js.jquery.JQuery;
 
 class Main {
 	

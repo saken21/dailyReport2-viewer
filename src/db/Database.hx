@@ -1,7 +1,6 @@
 package db;
 
-import jp.saken.utils.Ajax;
-import jp.saken.utils.Dom;
+import jp.saken.js.utils.Ajax;
  
 class Database {
 	
@@ -25,7 +24,7 @@ class Database {
 			}
 			
 			_counter--;
-			if (_counter == 0) Dom.jWindow.trigger('loadDB');
+			if (_counter == 0) Manager.jWindow().trigger('loadDB');
 			
 		},where);
 		

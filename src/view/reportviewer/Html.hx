@@ -1,8 +1,8 @@
 package view.reportviewer;
 
-import js.JQuery;
+import js.jquery.JQuery;
 import js.html.Image;
-import jp.saken.utils.Handy;
+import jp.saken.common.utils.Handy;
 import db.Members;
 import db.Tasks;
 import db.Works;
