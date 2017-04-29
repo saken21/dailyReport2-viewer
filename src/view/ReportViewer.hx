@@ -372,8 +372,11 @@ class ReportViewer {
 		
 		for (q in 0...tasks.length) {
 			
-			var taskID    :Int     = tasks[q];
-			var taskInfo  :Dynamic = Tasks.db[taskID];
+			var taskID  :Int     = tasks[q];
+			var taskInfo:Dynamic = Tasks.db[taskID];
+
+			if (taskInfo == null) continue;
+
 			var workID    :Int     = taskInfo.work_id;
 			var workInfo  :Dynamic = Works.db[workID];
 			var clientID  :Int     = workInfo.client_id;

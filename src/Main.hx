@@ -1,11 +1,11 @@
 /**
 * ================================================================================
 *
-* Daily Report ver 2.01.04
+* Daily Report ver 2.01.05
 *
 * Author : KENTA SAKATA
 * Since  : 2013/05/14
-* Update : 2017/02/04
+* Update : 2017/03/17
 *
 * Licensed under the MIT License
 * Copyright (c) Kenta Sakata

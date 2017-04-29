@@ -1579,7 +1579,11 @@ view_ReportViewer.getReportString = function(info) {
 	var _g1 = 0;
 	var _g = tasks.length;
 	while(_g1 < _g) {
-		var workID = db_Tasks.db[tasks[_g1++]].work_id;
+		var taskInfo = db_Tasks.db[tasks[_g1++]];
+		if(taskInfo == null) {
+			continue;
+		}
+		var workID = taskInfo.work_id;
 		var workInfo = db_Works.db[workID];
 		var clientID = workInfo.client_id;
 		var clientInfo = db_Clients.db[clientID];
