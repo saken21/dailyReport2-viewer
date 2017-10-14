@@ -203,7 +203,7 @@ class Html {
 				
 				if (member == null) continue;
 
-				html += '<li' + cls + ' title="' + member.parmanent_id + '">★</li>';
+				html += '<li' + cls + ' title="' + member.parmanent_id + '">★<span class="starName">' + member.parmanent_id + '</span></li>';
 
 			}
 

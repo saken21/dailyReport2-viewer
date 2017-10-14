@@ -770,6 +770,23 @@ h1 {
 				cursor:default;
 			}
 		
+				#reportviewer-content .report .footer .star ul li .starName {
+					display: none;
+					position: absolute;
+					top: 100%;
+					left: 0;
+					width: 70px;
+					padding: 5px;
+					border: 1px solid #efefef;
+					background-color: #fff;
+					text-align: center;
+					z-index: 1;
+				}
+
+				.specialmode #reportviewer-content .report .footer .star ul li:hover .starName {
+					display: block;
+				}
+		
 			#reportviewer-content .report .footer .star ul li.mine {
 				color:#ffb72b;
 			}
@@ -923,6 +940,10 @@ h1 {
 	padding:30px 0;
 	text-align:center;
 }
+
+	#poster figure {
+		margin-bottom:20px;	
+	}
 
 	#poster img {
 		width:70%;
