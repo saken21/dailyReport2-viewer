@@ -180,6 +180,10 @@ Manager.init = function(event) {
 	jp_saken_js_ui_UI.setPagetop($("#pagetop").find("a"));
 	ui_Keyboard.init();
 	view_Login.start();
+	var search = window.location.search;
+	if(new EReg("specialmode=true","g").match(search)) {
+		$("#all").addClass("specialmode");
+	}
 };
 Manager.jWindow = function() {
 	return Manager._jWindow;
