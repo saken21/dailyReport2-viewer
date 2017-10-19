@@ -37,7 +37,6 @@ class Html {
 		var starts    :Array<Int>    = info.stars ? info.stars.split(',') : [];
 		var archives  :Array<Int>    = info.archives ? info.archives.split(',') : [];
 		var team      :String        = memberDB.team;
-		
 		var myParmanentID:String = Manager.myParmanentID;
 		
 		if (starts.indexOf(myID) > -1) cls += 'stared ';
@@ -51,6 +50,7 @@ class Html {
 		    		<p class="name"><a class="search">' + memberDB.name + '</a></p>
 					<aside>
 						<time datetime="' + date + '" class="datetime"><a class="search">' + date + '</a> <a class="search">' + day + '</a></time>
+						<div class="editTime"><input type="date" value="' + StringTools.replace(date,'.','-') + '"><p class="updateDatetime">更新</p></div>
 						<button type="button" class="edit">編集</button>
 					</aside>
 		    	</header>

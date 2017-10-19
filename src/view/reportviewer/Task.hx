@@ -3,7 +3,7 @@ package view.reportviewer;
 import js.Browser;
 import js.jquery.JQuery;
 import js.jquery.Event;
-import jp.saken.js.utils.Ajax;
+import utils.Ajax;
 import jp.saken.js.utils.Handy;
 
 class Task {

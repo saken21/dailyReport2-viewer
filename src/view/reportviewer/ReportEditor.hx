@@ -4,7 +4,7 @@ import js.Browser;
 import js.jquery.JQuery;
 import js.jquery.Event;
 import jp.saken.common.utils.Handy;
-import jp.saken.js.utils.Ajax;
+import utils.Ajax;
 import utils.Data;
 
 class ReportEditor {

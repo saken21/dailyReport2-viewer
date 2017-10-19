@@ -2,7 +2,7 @@ package view;
 
 import js.jquery.JQuery;
 import js.jquery.Event;
-import jp.saken.js.utils.Ajax;
+import utils.Ajax;
 import db.Members;
 import utils.Data;
 import view.reportviewer.Html;

@@ -4,7 +4,7 @@ import haxe.Json;
 import js.Cookie;
 import js.jquery.JQuery;
 import js.jquery.Event;
-import jp.saken.js.utils.Ajax;
+import utils.Ajax;
 import jp.saken.js.utils.Handy;
  
 class Login {

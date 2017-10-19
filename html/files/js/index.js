@@ -188,7 +188,7 @@ Manager.jWindow = function() {
 	return Manager._jWindow;
 };
 Manager.login = function() {
-	jp_saken_js_utils_Ajax.getDatetime(function(datetime) {
+	utils_Ajax.getDatetime(function(datetime) {
 		Manager.visitDatetime = datetime;
 		Manager.visitDate = Manager.visitDatetime.split(" ")[0];
 		Manager.pastDate = jp_saken_common_utils_Handy.getPastDate(datetime,100);
@@ -321,7 +321,7 @@ db_Database.load = function(db1,table,columns,where) {
 		db_Database._counter = 0;
 	}
 	db_Database._counter++;
-	jp_saken_js_utils_Ajax.getData(table,columns,function(data) {
+	utils_Ajax.getData(table,columns,function(data) {
 		var _g1 = 0;
 		var _g = data.length;
 		while(_g1 < _g) {
@@ -971,149 +971,6 @@ jp_saken_js_ui_UI.getHref = function(jTarget,key) {
 	}
 	return result;
 };
-var jp_saken_js_utils_Ajax = function() { };
-jp_saken_js_utils_Ajax.__name__ = true;
-jp_saken_js_utils_Ajax.getIP = function(onLoaded) {
-	var http = new haxe_Http("files/php/" + "getIP.php");
-	jp_saken_js_utils_Ajax.setBusy();
-	http.onData = function(data) {
-		onLoaded(data);
-		jp_saken_js_utils_Ajax.unsetBusy();
-	};
-	http.request(true);
-};
-jp_saken_js_utils_Ajax.getDatetime = function(onLoaded) {
-	var http = new haxe_Http("files/php/" + "getDatetime.php");
-	jp_saken_js_utils_Ajax.setBusy();
-	http.onData = function(data) {
-		var tmp = JSON.parse(data);
-		onLoaded(tmp);
-		jp_saken_js_utils_Ajax.unsetBusy();
-	};
-	http.request(true);
-};
-jp_saken_js_utils_Ajax.uploadImage = function(filename,base64,onLoaded) {
-	var http = new haxe_Http("files/php/" + "uploadImage.php");
-	jp_saken_js_utils_Ajax.setBusy();
-	http.onData = function(data) {
-		if(onLoaded != null) {
-			onLoaded();
-		}
-		jp_saken_js_utils_Ajax.unsetBusy();
-	};
-	http.setParameter("filename",filename);
-	http.setParameter("base64",base64);
-	http.request(true);
-};
-jp_saken_js_utils_Ajax.deleteImage = function(filename,onLoaded) {
-	var http = new haxe_Http("files/php/" + "deleteImage.php");
-	jp_saken_js_utils_Ajax.setBusy();
-	http.onData = function(data) {
-		if(onLoaded != null) {
-			onLoaded();
-		}
-		jp_saken_js_utils_Ajax.unsetBusy();
-	};
-	http.setParameter("filename",filename);
-	http.request(true);
-};
-jp_saken_js_utils_Ajax.getData = function(table,columns,onLoaded,where) {
-	if(where == null) {
-		where = "";
-	}
-	jp_saken_js_utils_Ajax.setConnectDB();
-	jp_saken_js_utils_Ajax._connectDB.onData = function(data) {
-		var tmp = JSON.parse(data);
-		onLoaded(tmp);
-		jp_saken_js_utils_Ajax.unsetBusy();
-	};
-	var query = "SELECT " + columns.join(",") + " FROM " + table;
-	if(where.length > 0) {
-		query += " WHERE " + where;
-	}
-	jp_saken_js_utils_Ajax.requestConnectDB(query);
-};
-jp_saken_js_utils_Ajax.getMaxData = function(table,column,onLoaded,where) {
-	if(where == null) {
-		where = "";
-	}
-	jp_saken_js_utils_Ajax.setConnectDB();
-	jp_saken_js_utils_Ajax._connectDB.onData = function(data) {
-		var reg = new EReg("([0-9]+)","");
-		var isMatch = reg.match(data);
-		var tmp = isMatch ? Std.parseInt(reg.matched(0)) : 0;
-		onLoaded(tmp);
-		jp_saken_js_utils_Ajax.unsetBusy();
-	};
-	var query = "SELECT MAX(" + column + ") FROM " + table;
-	if(where.length > 0) {
-		query += " WHERE " + where;
-	}
-	jp_saken_js_utils_Ajax.requestConnectDB(query);
-};
-jp_saken_js_utils_Ajax.getIsEmpty = function(table,onLoaded,where) {
-	jp_saken_js_utils_Ajax.getData(table,["id"],function(data) {
-		onLoaded(data.length < 1);
-	},where);
-};
-jp_saken_js_utils_Ajax.insertData = function(table,columns,values,onLoaded) {
-	jp_saken_js_utils_Ajax.setConnectDB();
-	jp_saken_js_utils_Ajax._connectDB.onData = function(data) {
-		if(onLoaded != null) {
-			onLoaded(Std.parseInt(data));
-		}
-		jp_saken_js_utils_Ajax.unsetBusy();
-	};
-	var _g1 = 0;
-	var _g = values.length;
-	while(_g1 < _g) {
-		var i = _g1++;
-		values[i] = "'" + Std.string(values[i]) + "'";
-	}
-	var query = "INSERT INTO " + table + " (" + columns.join(",") + ") VALUES (" + values.join(",") + ")";
-	jp_saken_js_utils_Ajax.requestConnectDB(query,true);
-};
-jp_saken_js_utils_Ajax.updateData = function(table,columns,values,where,onLoaded) {
-	jp_saken_js_utils_Ajax.setConnectDB();
-	jp_saken_js_utils_Ajax._connectDB.onData = function(data) {
-		if(onLoaded != null) {
-			onLoaded();
-		}
-		jp_saken_js_utils_Ajax.unsetBusy();
-	};
-	var array = [];
-	var _g1 = 0;
-	var _g = columns.length;
-	while(_g1 < _g) {
-		var p = _g1++;
-		array[p] = columns[p] + "= '" + Std.string(values[p]) + "'";
-	}
-	var query = "UPDATE " + table + " SET " + array.join(",") + " WHERE " + where;
-	jp_saken_js_utils_Ajax.requestConnectDB(query);
-};
-jp_saken_js_utils_Ajax.setConnectDB = function() {
-	jp_saken_js_utils_Ajax._connectDB = new haxe_Http("files/php/" + "connectDB.php");
-};
-jp_saken_js_utils_Ajax.requestConnectDB = function(query,isInsert) {
-	if(isInsert == null) {
-		isInsert = false;
-	}
-	jp_saken_js_utils_Ajax.setBusy();
-	jp_saken_js_utils_Ajax._connectDB.setParameter("query",query);
-	if(isInsert) {
-		jp_saken_js_utils_Ajax._connectDB.setParameter("insert","true");
-	}
-	jp_saken_js_utils_Ajax._connectDB.request(true);
-};
-jp_saken_js_utils_Ajax.setBusy = function() {
-	$(window).on("beforeunload",null,jp_saken_js_utils_Ajax.onBeforeunload);
-};
-jp_saken_js_utils_Ajax.unsetBusy = function() {
-	$(window).unbind("beforeunload",jp_saken_js_utils_Ajax.onBeforeunload);
-};
-jp_saken_js_utils_Ajax.onBeforeunload = function(event) {
-	return "データベース登録中です。";
-};
 var jp_saken_js_utils_Handy = function() { };
 jp_saken_js_utils_Handy.__name__ = true;
 jp_saken_js_utils_Handy.getUA = function() {
@@ -1345,6 +1202,149 @@ ui_Keyboard.onKeydown = function(event) {
 		}
 	}
 };
+var utils_Ajax = function() { };
+utils_Ajax.__name__ = true;
+utils_Ajax.getIP = function(onLoaded) {
+	var http = new haxe_Http("files/php/" + "getIP.php");
+	utils_Ajax.setBusy();
+	http.onData = function(data) {
+		onLoaded(data);
+		utils_Ajax.unsetBusy();
+	};
+	http.request(true);
+};
+utils_Ajax.getDatetime = function(onLoaded) {
+	var http = new haxe_Http("files/php/" + "getDatetime.php");
+	utils_Ajax.setBusy();
+	http.onData = function(data) {
+		var tmp = JSON.parse(data);
+		onLoaded(tmp);
+		utils_Ajax.unsetBusy();
+	};
+	http.request(true);
+};
+utils_Ajax.uploadImage = function(filename,base64,onLoaded) {
+	var http = new haxe_Http("files/php/" + "uploadImage.php");
+	utils_Ajax.setBusy();
+	http.onData = function(data) {
+		if(onLoaded != null) {
+			onLoaded();
+		}
+		utils_Ajax.unsetBusy();
+	};
+	http.setParameter("filename",filename);
+	http.setParameter("base64",base64);
+	http.request(true);
+};
+utils_Ajax.deleteImage = function(filename,onLoaded) {
+	var http = new haxe_Http("files/php/" + "deleteImage.php");
+	utils_Ajax.setBusy();
+	http.onData = function(data) {
+		if(onLoaded != null) {
+			onLoaded();
+		}
+		utils_Ajax.unsetBusy();
+	};
+	http.setParameter("filename",filename);
+	http.request(true);
+};
+utils_Ajax.getData = function(table,columns,onLoaded,where) {
+	if(where == null) {
+		where = "";
+	}
+	utils_Ajax.setConnectDB();
+	utils_Ajax._connectDB.onData = function(data) {
+		var tmp = JSON.parse(data);
+		onLoaded(tmp);
+		utils_Ajax.unsetBusy();
+	};
+	var query = "SELECT " + columns.join(",") + " FROM " + table;
+	if(where.length > 0) {
+		query += " WHERE " + where;
+	}
+	utils_Ajax.requestConnectDB(query);
+};
+utils_Ajax.getMaxData = function(table,column,onLoaded,where) {
+	if(where == null) {
+		where = "";
+	}
+	utils_Ajax.setConnectDB();
+	utils_Ajax._connectDB.onData = function(data) {
+		var reg = new EReg("([0-9]+)","");
+		var isMatch = reg.match(data);
+		var tmp = isMatch ? Std.parseInt(reg.matched(0)) : 0;
+		onLoaded(tmp);
+		utils_Ajax.unsetBusy();
+	};
+	var query = "SELECT MAX(" + column + ") FROM " + table;
+	if(where.length > 0) {
+		query += " WHERE " + where;
+	}
+	utils_Ajax.requestConnectDB(query);
+};
+utils_Ajax.getIsEmpty = function(table,onLoaded,where) {
+	utils_Ajax.getData(table,["id"],function(data) {
+		onLoaded(data.length < 1);
+	},where);
+};
+utils_Ajax.insertData = function(table,columns,values,onLoaded) {
+	utils_Ajax.setConnectDB();
+	utils_Ajax._connectDB.onData = function(data) {
+		if(onLoaded != null) {
+			onLoaded(Std.parseInt(data));
+		}
+		utils_Ajax.unsetBusy();
+	};
+	var _g1 = 0;
+	var _g = values.length;
+	while(_g1 < _g) {
+		var i = _g1++;
+		values[i] = "\"" + Std.string(values[i]) + "\"";
+	}
+	var query = "INSERT INTO " + table + " (" + columns.join(",") + ") VALUES (" + values.join(",") + ")";
+	utils_Ajax.requestConnectDB(query,true);
+};
+utils_Ajax.updateData = function(table,columns,values,where,onLoaded) {
+	utils_Ajax.setConnectDB();
+	utils_Ajax._connectDB.onData = function(data) {
+		if(onLoaded != null) {
+			onLoaded();
+		}
+		utils_Ajax.unsetBusy();
+	};
+	var array = [];
+	var _g1 = 0;
+	var _g = columns.length;
+	while(_g1 < _g) {
+		var p = _g1++;
+		array[p] = columns[p] + "= \"" + Std.string(values[p]) + "\"";
+	}
+	var query = "UPDATE " + table + " SET " + array.join(",") + " WHERE " + where;
+	utils_Ajax.requestConnectDB(query);
+};
+utils_Ajax.setConnectDB = function() {
+	utils_Ajax._connectDB = new haxe_Http("files/php/" + "connectDB.php");
+};
+utils_Ajax.requestConnectDB = function(query,isInsert) {
+	if(isInsert == null) {
+		isInsert = false;
+	}
+	utils_Ajax.setBusy();
+	utils_Ajax._connectDB.setParameter("query",query);
+	if(isInsert) {
+		utils_Ajax._connectDB.setParameter("insert","true");
+	}
+	utils_Ajax._connectDB.request(true);
+};
+utils_Ajax.setBusy = function() {
+	$(window).on("beforeunload",null,utils_Ajax.onBeforeunload);
+};
+utils_Ajax.unsetBusy = function() {
+	$(window).unbind("beforeunload",utils_Ajax.onBeforeunload);
+};
+utils_Ajax.onBeforeunload = function(event) {
+	return "データベース登録中です。";
+};
 var utils_Data = function() { };
 utils_Data.__name__ = true;
 utils_Data.getDate = function(datetime) {
@@ -1387,7 +1387,7 @@ view_Information.onLoop = function() {
 };
 view_Information.getData = function(columns,onLoaded) {
 	var where = "updatetime > \"" + view_Information._lastDatetime + "\" AND member_id != " + Manager.myID;
-	jp_saken_js_utils_Ajax.getData("reports",columns,onLoaded,where);
+	utils_Ajax.getData("reports",columns,onLoaded,where);
 };
 view_Information.set = function(data) {
 	var length = data.length;
@@ -1401,7 +1401,7 @@ view_Information.onClick = function(event) {
 	Manager.reload();
 	view_Information._jLength.text("0");
 	view_Information._jParent.stop().fadeOut(300);
-	jp_saken_js_utils_Ajax.getDatetime(function(datetime) {
+	utils_Ajax.getDatetime(function(datetime) {
 		view_Information._lastDatetime = datetime;
 	});
 };
@@ -1442,7 +1442,7 @@ view_Login.submit = function(event) {
 	var _this_r = new RegExp("_","".split("u").join(""));
 	id = id.replace(_this_r,"-");
 	var where = "(parmanent_number = \"" + id + "\" OR parmanent_id = \"" + id + "\") AND pass = \"" + pass + "\"";
-	jp_saken_js_utils_Ajax.getData(table,columns,view_Login.checkData,where);
+	utils_Ajax.getData(table,columns,view_Login.checkData,where);
 	if(event != null) {
 		event.preventDefault();
 	}
@@ -1486,7 +1486,7 @@ view_ReportViewer.hide = function() {
 	view_ReportViewer._jParent.stop().hide();
 };
 view_ReportViewer.loadDB = function(onLoaded) {
-	jp_saken_js_utils_Ajax.getData("reports",["*"],function(data) {
+	utils_Ajax.getData("reports",["*"],function(data) {
 		view_ReportViewer._fullData = view_ReportViewer.getSortedFullData(data);
 		if(onLoaded != null) {
 			onLoaded();
@@ -1702,7 +1702,7 @@ view_ReportViewer.fadein = function() {
 	}
 };
 view_ReportViewer.addNewEditor = function(myID,date) {
-	jp_saken_js_utils_Ajax.getIsEmpty("reports",function(isEmpty) {
+	utils_Ajax.getIsEmpty("reports",function(isEmpty) {
 		if(!isEmpty) {
 			return;
 		}
@@ -1750,6 +1750,9 @@ view_ReportViewer.onClick = function(event) {
 	}
 	if(jTarget.hasClass("search")) {
 		view_reportviewer_SearchNavi.input(jTarget.text());
+	}
+	if(jTarget.hasClass("updateDatetime")) {
+		view_ReportViewer.updateDatetime(jReport,jTarget);
 	}
 };
 view_ReportViewer.onKeyup = function(event) {
@@ -1842,11 +1845,11 @@ view_ReportViewer.copyTasks = function(jReport) {
 	if(jReport.data("id") > 0) {
 		return;
 	}
-	jp_saken_js_utils_Ajax.getMaxData("reports","id",function(id) {
+	utils_Ajax.getMaxData("reports","id",function(id) {
 		if(id == 0) {
 			return;
 		}
-		jp_saken_js_utils_Ajax.getData("reports",["task_id_list"],function(data) {
+		utils_Ajax.getData("reports",["task_id_list"],function(data) {
 			var html = view_reportviewer_Html.getTasks(data[0].task_id_list.split(","),true);
 			jReport.find(".tasks").html(html);
 			view_ReportViewer.setTotaltime(jReport);
@@ -1862,7 +1865,7 @@ view_ReportViewer.addStar = function(jReport) {
 	var myParmanentID = Manager.myParmanentID;
 	var jStars = jReport.find(".star").find("ul");
 	var where = "id = " + reportID;
-	jp_saken_js_utils_Ajax.getData("reports",["star_list","is_checked_star"],function(data) {
+	utils_Ajax.getData("reports",["star_list","is_checked_star"],function(data) {
 		var info = data[0];
 		var array = info.star_list ? info.star_list.split(",") : [];
 		var isEmpty = array.indexOf(myID) < 0;
@@ -1892,7 +1895,7 @@ view_ReportViewer.addStar = function(jReport) {
 		view_ReportViewer.updateStars(reportID,stars);
 		var columns = ["star_list","is_checked_star"];
 		var values = [stars,isEmpty ? 0 : checkd];
-		jp_saken_js_utils_Ajax.updateData("reports",columns,values,where);
+		utils_Ajax.updateData("reports",columns,values,where);
 	},where);
 };
 view_ReportViewer.archiveReport = function(jReport,isLoad) {
@@ -1903,12 +1906,12 @@ view_ReportViewer.archiveReport = function(jReport,isLoad) {
 	var reportID = jReport.data("id");
 	var myID = Manager.myID;
 	var where = "id = " + reportID;
-	jp_saken_js_utils_Ajax.getData("reports",["archived_list"],function(data) {
+	utils_Ajax.getData("reports",["archived_list"],function(data) {
 		var array = data[0].archived_list ? data[0].archived_list.split(",") : [];
 		array.push(myID);
 		var archives = array.join(",");
 		view_ReportViewer.updateArchive(reportID,archives);
-		jp_saken_js_utils_Ajax.updateData("reports",["archived_list"],[archives],where);
+		utils_Ajax.updateData("reports",["archived_list"],[archives],where);
 	},where);
 	if(isLoad) {
 		view_ReportViewer.loadMore(1);
@@ -1922,6 +1925,19 @@ view_ReportViewer.updateArchive = function(reportID,archives) {
 		if(view_ReportViewer._fullData[p].id == reportID) {
 			view_ReportViewer._fullData[p].archived_list = archives;
 		}
+	}
+};
+view_ReportViewer.updateDatetime = function(jReport,jTarget) {
+	var updatetime = jTarget.siblings("input[type=\"date\"]").val();
+	if(updatetime == null || updatetime == "") {
+		window.alert("空欄があります。");
+		return;
+	}
+	var where = "id = " + Std.string(jReport.data("id"));
+	if(window.confirm(updatetime + "に日付を更新しますか？")) {
+		utils_Ajax.updateData("reports",["date"],[updatetime],where,function() {
+			window.alert("日付を更新しました。");
+		});
 	}
 };
 var view_SimpleBoard = function() { };
@@ -1944,7 +1960,7 @@ view_SimpleBoard.onLoop = function() {
 	if(view_SimpleBoard._lastUpdatetime == null) {
 		view_SimpleBoard._lastUpdatetime = Manager.visitDatetime;
 	}
-	jp_saken_js_utils_Ajax.getData("simpleboard",["id"],function(data) {
+	utils_Ajax.getData("simpleboard",["id"],function(data) {
 		if(data.length > 0) {
 			view_SimpleBoard.start();
 		}
@@ -1987,7 +2003,7 @@ view_SimpleBoard.start = function() {
 };
 view_SimpleBoard.setEntries = function() {
 	var columns = ["id","member_id","text","check_list"];
-	jp_saken_js_utils_Ajax.getData("simpleboard",columns,function(data) {
+	utils_Ajax.getData("simpleboard",columns,function(data) {
 		var myID = Manager.myID;
 		var html = "";
 		data.reverse();
@@ -2011,7 +2027,7 @@ view_SimpleBoard.addEntry = function(text) {
 	var myID = Manager.myID;
 	view_SimpleBoard.getDatetime(function(datetime) {
 		var columns = ["member_id","text","updatetime","check_list"];
-		jp_saken_js_utils_Ajax.insertData("simpleboard",columns,[myID,text,datetime,myID],function(lastID) {
+		utils_Ajax.insertData("simpleboard",columns,[myID,text,datetime,myID],function(lastID) {
 			view_SimpleBoard._checkList[lastID] = [myID];
 			var html = jp_saken_common_utils_Handy.getAdjustedHTML(text);
 			var html1 = view_SimpleBoard.getEntryHTML(lastID,myID,html,true,1);
@@ -2044,11 +2060,11 @@ view_SimpleBoard.checkEntry = function(jTarget,jCheckbox) {
 };
 view_SimpleBoard.updateEntry = function(column,value,where) {
 	view_SimpleBoard.getDatetime(function(datetime) {
-		jp_saken_js_utils_Ajax.updateData("simpleboard",[column,"updatetime"],[value,datetime],where);
+		utils_Ajax.updateData("simpleboard",[column,"updatetime"],[value,datetime],where);
 	});
 };
 view_SimpleBoard.getDatetime = function(onLoaded) {
-	jp_saken_js_utils_Ajax.getDatetime(function(datetime) {
+	utils_Ajax.getDatetime(function(datetime) {
 		view_SimpleBoard._lastUpdatetime = datetime;
 		onLoaded(datetime);
 	});
@@ -2082,7 +2098,7 @@ view_StarChecker.hide = function() {
 	view_StarChecker._jParent.stop().hide();
 };
 view_StarChecker.onLoop = function() {
-	jp_saken_js_utils_Ajax.getData("reports",["id","date","star_list"],function(data) {
+	utils_Ajax.getData("reports",["id","date","star_list"],function(data) {
 		var length = data.length;
 		if(length > 0) {
 			view_StarChecker.set(data);
@@ -2192,7 +2208,7 @@ view_StarChecker.close = function() {
 };
 view_StarChecker.jump = function(jTarget) {
 	var jParent = jTarget.parents("li");
-	jp_saken_js_utils_Ajax.updateData("reports",["is_checked_star"],[1],"id = " + Std.string(jParent.data("id")));
+	utils_Ajax.updateData("reports",["is_checked_star"],[1],"id = " + Std.string(jParent.data("id")));
 	view_reportviewer_SearchNavi.input(jTarget.data("search"));
 	jParent.remove();
 	if(view_StarChecker._jContent.find("li").length == 0) {
@@ -2226,10 +2242,10 @@ view_reportviewer_AutoSave.unsetData = function(jReport) {
 	if(jReport.data("id") > 0) {
 		return;
 	}
-	jp_saken_js_utils_Ajax.updateData("autosaves",["tasks","note","images"],["","",""],"member_id = " + Manager.myID);
+	utils_Ajax.updateData("autosaves",["tasks","note","images"],["","",""],"member_id = " + Manager.myID);
 };
 view_reportviewer_AutoSave.setHTML = function(jReport) {
-	jp_saken_js_utils_Ajax.getData("autosaves",["tasks","note","images"],function(data) {
+	utils_Ajax.getData("autosaves",["tasks","note","images"],function(data) {
 		if(data.length == 0) {
 			return;
 		}
@@ -2276,13 +2292,13 @@ view_reportviewer_AutoSave.getImages = function(jReport) {
 	return array.join("\n");
 };
 view_reportviewer_AutoSave.update = function(myID,columns,values) {
-	jp_saken_js_utils_Ajax.getIsEmpty("autosaves",function(isEmpty) {
+	utils_Ajax.getIsEmpty("autosaves",function(isEmpty) {
 		if(isEmpty) {
 			columns.unshift("member_id");
 			values.unshift(myID);
-			jp_saken_js_utils_Ajax.insertData("autosaves",columns,values);
+			utils_Ajax.insertData("autosaves",columns,values);
 		} else {
-			jp_saken_js_utils_Ajax.updateData("autosaves",columns,values,"member_id = " + myID);
+			utils_Ajax.updateData("autosaves",columns,values,"member_id = " + myID);
 		}
 	},"member_id = " + myID);
 };
@@ -2413,7 +2429,7 @@ view_reportviewer_Html.getReport = function(id,memberID,info,isEditMode) {
 	if(team.length == 0) {
 		team = memberDB.section;
 	}
-	var html = "\n\t\t<li class=\"report " + cls + team + " loading\" data-id=\"" + id + "\">\n\t\t\t<article>\n\t\t\t\t<header class=\"header\">\n\t\t    \t\t<p class=\"name\"><a class=\"search\">" + Std.string(memberDB.name) + "</a></p>\n\t\t\t\t\t<aside>\n\t\t\t\t\t\t<time datetime=\"" + date + "\" class=\"datetime\"><a class=\"search\">" + date + "</a> <a class=\"search\">" + day + "</a></time>\n\t\t\t\t\t\t<button type=\"button\" class=\"edit\">編集</button>\n\t\t\t\t\t</aside>\n\t\t    \t</header>\n\t\t    \t<ul class=\"tasks\">" + view_reportviewer_Html.getTasks(tasks) + "</ul>" + view_reportviewer_Html.getTotaltime(tasks) + "\n\t\t\t\t<button type=\"button\" class=\"addTask\">+</button>\n\t\t\t\t<button type=\"button\" class=\"copyTask\">■</button>\n\t\t    \t<aside class=\"note\">\n\t\t    \t\t<p><textarea placeholder=\"今日のひとこと\">" + note + "</textarea><em>" + jp_saken_common_utils_Handy.getAdjustedHTML(note) + "</em></p>\n\t\t    \t</aside>\n\t\t    \t<aside class=\"image\">\n\t\t\t\t\t<p>画像をドロップしてください</p>\n\t\t    \t\t<figure>" + view_reportviewer_Html.getImages(images) + "</figure>\n\t\t    \t</aside>\n\t\t    \t<button type=\"button\" class=\"update\">&nbsp;</button>\n\t\t    \t<footer class=\"footer\">\n\t\t    \t\t<section class=\"star\">\n\t\t        \t\t<button type=\"button\" class=\"addStar\">★</button>\n\t\t        \t\t<ul>" + view_reportviewer_Html.getStars(starts) + "</ul>\n\t\t    \t\t</section>\n\t\t    \t\t<time datetime=\"" + utils_Data.getDate(updatetime) + "\" class=\"lastupdate\">" + Std.string(HxOverrides.strDate(updatetime)) + "</time>\n\t\t    \t\t<button type=\"button\" class=\"archiveReport\">×</button>\n\t\t    \t</footer>\n\t\t\t</article>\n\t\t</li>";
+	var html = "\n\t\t<li class=\"report " + cls + team + " loading\" data-id=\"" + id + "\">\n\t\t\t<article>\n\t\t\t\t<header class=\"header\">\n\t\t    \t\t<p class=\"name\"><a class=\"search\">" + Std.string(memberDB.name) + "</a></p>\n\t\t\t\t\t<aside>\n\t\t\t\t\t\t<time datetime=\"" + date + "\" class=\"datetime\"><a class=\"search\">" + date + "</a> <a class=\"search\">" + day + "</a></time>\n\t\t\t\t\t\t<div class=\"editTime\"><input type=\"date\" value=\"" + StringTools.replace(date,".","-") + "\"><p class=\"updateDatetime\">更新</p></div>\n\t\t\t\t\t\t<button type=\"button\" class=\"edit\">編集</button>\n\t\t\t\t\t</aside>\n\t\t    \t</header>\n\t\t    \t<ul class=\"tasks\">" + view_reportviewer_Html.getTasks(tasks) + "</ul>" + view_reportviewer_Html.getTotaltime(tasks) + "\n\t\t\t\t<button type=\"button\" class=\"addTask\">+</button>\n\t\t\t\t<button type=\"button\" class=\"copyTask\">■</button>\n\t\t    \t<aside class=\"note\">\n\t\t    \t\t<p><textarea placeholder=\"今日のひとこと\">" + note + "</textarea><em>" + jp_saken_common_utils_Handy.getAdjustedHTML(note) + "</em></p>\n\t\t    \t</aside>\n\t\t    \t<aside class=\"image\">\n\t\t\t\t\t<p>画像をドロップしてください</p>\n\t\t    \t\t<figure>" + view_reportviewer_Html.getImages(images) + "</figure>\n\t\t    \t</aside>\n\t\t    \t<button type=\"button\" class=\"update\">&nbsp;</button>\n\t\t    \t<footer class=\"footer\">\n\t\t    \t\t<section class=\"star\">\n\t\t        \t\t<button type=\"button\" class=\"addStar\">★</button>\n\t\t        \t\t<ul>" + view_reportviewer_Html.getStars(starts) + "</ul>\n\t\t    \t\t</section>\n\t\t    \t\t<time datetime=\"" + utils_Data.getDate(updatetime) + "\" class=\"lastupdate\">" + Std.string(HxOverrides.strDate(updatetime)) + "</time>\n\t\t    \t\t<button type=\"button\" class=\"archiveReport\">×</button>\n\t\t    \t</footer>\n\t\t\t</article>\n\t\t</li>";
 	return html;
 };
 view_reportviewer_Html.getTasks = function(tasks,isCopy) {
@@ -2645,11 +2661,11 @@ view_reportviewer_ReportEditor.updateImages = function() {
 		var filename = jTarget.data("filename");
 		if(jTarget.hasClass("hidden")) {
 			jTarget.remove();
-			jp_saken_js_utils_Ajax.deleteImage(filename);
+			utils_Ajax.deleteImage(filename);
 		} else {
 			var base64 = jTarget.data("base64");
 			if(base64.length > 0) {
-				jp_saken_js_utils_Ajax.uploadImage(filename,base64);
+				utils_Ajax.uploadImage(filename,base64);
 				jTarget.find(".lightbox").prop("href","files/upload/" + filename);
 			}
 		}
@@ -2677,7 +2693,7 @@ view_reportviewer_ReportEditor.updateData = function() {
 		images.push(tmp1);
 	}
 	jNote.find("em").html(jp_saken_common_utils_Handy.getAdjustedHTML(note));
-	jp_saken_js_utils_Ajax.getDatetime(function(datetime) {
+	utils_Ajax.getDatetime(function(datetime) {
 		var colums = view_reportviewer_ReportEditor.COLUMN_LIST;
 		var values = Manager.myID;
 		var values1 = taskIDs.join(",");
@@ -2685,11 +2701,11 @@ view_reportviewer_ReportEditor.updateData = function() {
 		var values3 = [values,values1,note,values2,datetime,""];
 		view_reportviewer_ReportEditor._jParent.find(".lastupdate").text(Std.string(HxOverrides.strDate(datetime)));
 		if(id > 0) {
-			jp_saken_js_utils_Ajax.updateData("reports",colums,values3,"id = " + id,view_reportviewer_ReportEditor.onUpdated);
+			utils_Ajax.updateData("reports",colums,values3,"id = " + id,view_reportviewer_ReportEditor.onUpdated);
 		} else {
 			colums = colums.concat(["date"]);
 			values3.push(datetime);
-			jp_saken_js_utils_Ajax.insertData("reports",colums,values3,view_reportviewer_ReportEditor.onInsertedData);
+			utils_Ajax.insertData("reports",colums,values3,view_reportviewer_ReportEditor.onInsertedData);
 		}
 	});
 };
@@ -2786,7 +2802,7 @@ view_reportviewer_Task.prototype = {
 	judgeIsEmpty: function(table,name,string) {
 		var _gthis = this;
 		var tmp = this.getWhere(name,table == "works");
-		jp_saken_js_utils_Ajax.getIsEmpty(table,function(isEmpty) {
+		utils_Ajax.getIsEmpty(table,function(isEmpty) {
 			if(isEmpty) {
 				_gthis.addData(table,name,string);
 			} else {
@@ -2806,7 +2822,7 @@ view_reportviewer_Task.prototype = {
 				columns = ["client_id,name"];
 				values = [_gthis._clientID,name];
 			}
-			jp_saken_js_utils_Ajax.insertData(table,columns,values,function(lastID) {
+			utils_Ajax.insertData(table,columns,values,function(lastID) {
 				_gthis.getData(table,name);
 			});
 		},function() {
@@ -2816,7 +2832,7 @@ view_reportviewer_Task.prototype = {
 	,getData: function(table,name) {
 		var _gthis = this;
 		var tmp = this.getWhere(name,table == "works");
-		jp_saken_js_utils_Ajax.getData(table,["id"],function(data) {
+		utils_Ajax.getData(table,["id"],function(data) {
 			if(table == "clients") {
 				_gthis._clientID = data[0].id;
 				_gthis._jParent.trigger("getClientID");
@@ -2835,17 +2851,17 @@ view_reportviewer_Task.prototype = {
 	}
 	,update: function() {
 		var _gthis = this;
-		jp_saken_js_utils_Ajax.getDatetime(function(datetime) {
+		utils_Ajax.getDatetime(function(datetime) {
 			var myID = Manager.myID;
 			var table = "tasks";
 			var columns = ["member_id","work_id","hour","updatetime"];
 			var values = [myID,_gthis._workID,_gthis._hour,datetime];
 			if(_gthis._id > 0) {
-				jp_saken_js_utils_Ajax.updateData(table,columns,values,"id = " + _gthis._id,function() {
+				utils_Ajax.updateData(table,columns,values,"id = " + _gthis._id,function() {
 					_gthis._jParent.trigger("updated");
 				});
 			} else {
-				jp_saken_js_utils_Ajax.insertData(table,columns,values,function(lastID) {
+				utils_Ajax.insertData(table,columns,values,function(lastID) {
 					_gthis._jParent.data("id",lastID).trigger("updated");
 				});
 			}
@@ -2869,8 +2885,8 @@ db_Works.TABLE_NAME = "works";
 db_Works.COLUMN_LIST = ["id","client_id","name"];
 jp_saken_common_utils_API._path = "/api/";
 jp_saken_js_components_Lightbox.ID = "lightbox";
-jp_saken_js_utils_Ajax.PATH = "files/php/";
 jp_saken_js_utils_Handy._window = window;
+utils_Ajax.PATH = "files/php/";
 utils_Data.DAY_LIST = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 utils_Data.UPLOAD_FOLDER = "files/upload/";
 view_Login.COOKIE_NAME = "DR2LoginHistory2";

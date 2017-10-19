@@ -4,7 +4,7 @@
 		
 		$host = "localhost";
 		$name = "dailyReport";
-		$dsn  = "mysql:host=".$host.";dbname=".$name.";charset=utf8";
+		$dsn  = "mysql:host=".$host.";dbname=".$name.";charset=utf8mb4";
 		$id   = "root";
 		$pass = "root";
 

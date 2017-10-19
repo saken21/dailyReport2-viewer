@@ -2,7 +2,7 @@ package view.reportviewer;
 
 import js.jquery.JQuery;
 import js.html.Image;
-import jp.saken.js.utils.Ajax;
+import utils.Ajax;
 import jp.saken.common.utils.Handy;
  
 class AutoSave {

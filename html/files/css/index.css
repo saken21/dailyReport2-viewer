@@ -473,6 +473,28 @@ h1 {
 			float:left;
 		}
 
+		#reportviewer-content .report .header aside .editTime {
+			display: none;
+		}
+
+		#reportviewer-content .report .header aside .editTime .updateDatetime {
+			display: inline-block;
+			margin-left: 5px;
+			padding: 2px 7px;
+			background-color: #278cd9;
+			color: #fff;
+			font-size: 10px;
+			cursor: pointer;
+		}
+
+		.specialmode #reportviewer-content .report .header aside .datetime {
+			display: none;
+		}
+
+		.specialmode #reportviewer-content .report .header aside .editTime {
+			display: block;
+		}
+
 		#reportviewer-content .report .header aside .datetime.sun {
 			color:#f96060;
 		}

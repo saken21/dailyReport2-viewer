@@ -1,6 +1,6 @@
 package db;
 
-import jp.saken.js.utils.Ajax;
+import utils.Ajax;
  
 class Database {
 	

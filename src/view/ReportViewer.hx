@@ -1,10 +1,11 @@
 package view;
 
 import haxe.Json;
+import js.Browser;
 import js.jquery.JQuery;
 import js.jquery.Event;
 import jp.saken.js.components.Lightbox;
-import jp.saken.js.utils.Ajax;
+import utils.Ajax;
 import db.Members;
 import db.Tasks;
 import db.Clients;
@@ -449,6 +450,7 @@ class ReportViewer {
 		if (jTarget.hasClass('addStar')) addStar(jReport);
 		if (jTarget.hasClass('archiveReport')) archiveReport(jReport);
 		if (jTarget.hasClass('search')) SearchNavi.input(jTarget.text());
+		if (jTarget.hasClass('updateDatetime')) updateDatetime(jReport,jTarget);
 		
 	}
 	
@@ -730,6 +732,26 @@ class ReportViewer {
 			if (_fullData[p].id == reportID) _fullData[p].archived_list = archives;
 		}
 
+	}
+	
+	/* =======================================================================
+	Update Datetime
+	========================================================================== */
+	private static function updateDatetime(jReport:JQuery,jTarget:JQuery):Void {
+
+		var updatetime : String = jTarget.siblings('input[type="date"]').val();
+		if (updatetime == null || updatetime == '') {
+			Browser.window.alert('空欄があります。');
+			return;
+		}
+
+		var where : String = 'id = ' + jReport.data('id');
+		if (Browser.window.confirm(updatetime + 'に日付を更新しますか？')) {
+			Ajax.updateData(TABLE_NAME,['date'],[updatetime],where,function() {
+				Browser.window.alert('日付を更新しました。');
+			});
+		}
+		
 	}
 	
 }
