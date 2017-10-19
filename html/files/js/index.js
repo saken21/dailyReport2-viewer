@@ -180,8 +180,7 @@ Manager.init = function(event) {
 	jp_saken_js_ui_UI.setPagetop($("#pagetop").find("a"));
 	ui_Keyboard.init();
 	view_Login.start();
-	var search = window.location.search;
-	if(new EReg("specialmode=true","g").match(search)) {
+	if(new EReg("mode=special","g").match(window.location.search)) {
 		$("#all").addClass("specialmode");
 	}
 };
@@ -1360,7 +1359,7 @@ utils_Data.getDay = function(datetime) {
 var utils_TimeKeeper = function() { };
 utils_TimeKeeper.__name__ = true;
 utils_TimeKeeper.run = function() {
-	utils_TimeKeeper._timer = new haxe_Timer(3000);
+	utils_TimeKeeper._timer = new haxe_Timer(200);
 	utils_TimeKeeper._timer.run = utils_TimeKeeper.onLoop;
 };
 utils_TimeKeeper.stop = function() {

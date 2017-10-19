@@ -42,8 +42,7 @@ class Manager {
 		
 		Login.start();
 
-		var search : String = Browser.location.search;
-		if (~/specialmode=true/g.match(search)) new JQuery('#all').addClass('specialmode');
+		if (~/mode=special/g.match(Browser.location.search)) new JQuery('#all').addClass('specialmode');
 		
 	}
 

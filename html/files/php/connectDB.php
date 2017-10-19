@@ -2,7 +2,7 @@
 
 	if ($_POST) {
 		
-		$host = "local";
+		$host = "localhost";
 		$name = "dailyReport";
 		$dsn  = "mysql:host=".$host.";dbname=".$name.";charset=utf8";
 		$id   = "root";

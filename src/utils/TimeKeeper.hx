@@ -16,7 +16,7 @@ class TimeKeeper {
 	========================================================================== */
 	public static function run():Void {
 		
-		_timer = new Timer(3000);
+		_timer = new Timer(200);
 		_timer.run = onLoop;
 
 	}
