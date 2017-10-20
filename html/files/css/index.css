@@ -970,3 +970,28 @@ h1 {
 	#poster img {
 		width:70%;
 	}
+
+/*-------------------------------------------------------------------------
+	Timeout
+/*-----------------------------------------------------------------------*/
+#timeout {
+	text-align: center;
+}
+
+	#timeout img {
+		width: 340px;
+	}
+
+	#timeout a {
+		display: inline-block;
+		margin-top: 10px;
+		padding: 5px 19px;
+		border: 2px solid #ddd;
+		background: #fff no-repeat 9px center;
+		color: #333;
+		font-size: 16px;
+	}
+
+	#timeout a:hover {
+		background-color: #f2f6fa;
+	}

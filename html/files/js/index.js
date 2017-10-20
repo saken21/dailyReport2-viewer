@@ -212,7 +212,7 @@ Manager.reload = function() {
 	Manager.login();
 };
 Manager.timeout = function() {
-	$("#main").html("\n\t\t\t\t<div class=\"wrap\">\n\t\t\t\t\t<p>一定時間アクセスがなかったのでタイムアウトしました。</p>\n\t\t\t\t\t<a href=\"index.html\">日報に戻る</a>\n\t\t\t\t</div>");
+	$("#main").html("\n\t\t\t\t<div class=\"wrap\">\n\t\t\t\t\t<section id=\"timeout\">\n\t\t\t\t\t\t<figure>\n\t\t\t\t\t\t\t<img src=\"files/img/timeout.jpg\">\n\t\t\t\t\t\t\t<figcaption>一定時間更新がなかったのでタイムアウトしました</figcaption>\n\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t<a href=\"index.html\">日報に戻る</a>\n\t\t\t\t\t</section>\n\t\t\t\t</div>");
 };
 Manager.setFocusEvent = function() {
 	Manager.isFocus = true;

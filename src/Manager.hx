@@ -110,8 +110,13 @@ class Manager {
 
 			new JQuery('#main').html('
 				<div class="wrap">
-					<p>一定時間アクセスがなかったのでタイムアウトしました。</p>
-					<a href="index.html">日報に戻る</a>
+					<section id="timeout">
+						<figure>
+							<img src="files/img/timeout.jpg">
+							<figcaption>一定時間更新がなかったのでタイムアウトしました</figcaption>
+						</figure>
+						<a href="index.html">日報に戻る</a>
+					</section>
 				</div>');
 
 		}
