@@ -64,7 +64,7 @@ class StarChecker {
 		public static function onLoop():Void {
 
 			Ajax.getData(TABLE_NAME,['id','date','star_list'],function(data:Array<Dynamic>):Void {
-				
+
 				var length:Int = data.length;
 				if (length > 0) set(data);
 				

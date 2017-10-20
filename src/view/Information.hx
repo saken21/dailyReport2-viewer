@@ -58,7 +58,7 @@ class Information {
 	Set
 	========================================================================== */
 	private static function set(data:Array<Dynamic>):Void {
-		
+
 		var length:Int = data.length;
 		if (length == 0) return;
 		

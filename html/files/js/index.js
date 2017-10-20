@@ -180,6 +180,7 @@ Manager.init = function(event) {
 	jp_saken_js_ui_UI.setPagetop($("#pagetop").find("a"));
 	ui_Keyboard.init();
 	view_Login.start();
+	Manager.setFocusEvent();
 	if(new EReg("mode=special","g").match(window.location.search)) {
 		$("#all").addClass("specialmode");
 	}
@@ -210,6 +211,18 @@ Manager.reload = function() {
 	view_ReportViewer.reset();
 	Manager.login();
 };
+Manager.timeout = function() {
+	$("#main").html("\n\t\t\t\t<div class=\"wrap\">\n\t\t\t\t\t<p>一定時間アクセスがなかったのでタイムアウトしました。</p>\n\t\t\t\t\t<a href=\"index.html\">日報に戻る</a>\n\t\t\t\t</div>");
+};
+Manager.setFocusEvent = function() {
+	Manager.isFocus = true;
+	Manager._jWindow.on("focus",null,function() {
+		Manager.isFocus = true;
+	});
+	Manager._jWindow.on("blur",null,function() {
+		Manager.isFocus = false;
+	});
+};
 Manager.loadDB = function(onLoaded) {
 	Manager._jWindow.on("loadDB",null,onLoaded);
 	db_Members.load();
@@ -218,7 +231,7 @@ Manager.loadDB = function(onLoaded) {
 	db_Clients.load();
 };
 Manager.onLoadedDB = function(event) {
-	Manager._jWindow.unbind("loadDB",Manager.onLoadedDB);
+	Manager._jWindow.off("loadDB",null,Manager.onLoadedDB);
 	Manager._isLogined = true;
 	view_Login.hide();
 	view_SimpleBoard.show();
@@ -1359,18 +1372,22 @@ utils_Data.getDay = function(datetime) {
 var utils_TimeKeeper = function() { };
 utils_TimeKeeper.__name__ = true;
 utils_TimeKeeper.run = function() {
-	utils_TimeKeeper._timer = new haxe_Timer(200);
+	utils_TimeKeeper._counter = 0;
+	utils_TimeKeeper._timer = new haxe_Timer(1000);
 	utils_TimeKeeper._timer.run = utils_TimeKeeper.onLoop;
 };
 utils_TimeKeeper.stop = function() {
 	utils_TimeKeeper._timer.stop();
 };
 utils_TimeKeeper.onLoop = function() {
-	view_SimpleBoard.onLoop();
 	view_Information.onLoop();
-	view_StarChecker.onLoop();
 	view_ReportViewer.onLoop();
 	view_reportviewer_AutoSave.onLoop();
+	utils_TimeKeeper._counter = Manager.isFocus ? 0 : utils_TimeKeeper._counter + 1;
+	if(utils_TimeKeeper._counter == 60) {
+		utils_TimeKeeper.stop();
+		Manager.timeout();
+	}
 };
 var view_Information = function() { };
 view_Information.__name__ = true;
@@ -2889,6 +2906,7 @@ jp_saken_js_utils_Handy._window = window;
 utils_Ajax.PATH = "files/php/";
 utils_Data.DAY_LIST = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 utils_Data.UPLOAD_FOLDER = "files/upload/";
+utils_TimeKeeper.TIMEOUT = 60;
 view_Login.COOKIE_NAME = "DR2LoginHistory2";
 view_ReportViewer.TABLE_NAME = "reports";
 view_ReportViewer.LENGTH_AT_ONCE = 10;

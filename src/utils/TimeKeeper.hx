@@ -9,14 +9,17 @@ import view.reportviewer.AutoSave;
  
 class TimeKeeper {
 	
-	private static var _timer:Timer;
+	private static var _timer  :Timer;
+	private static var _counter:Int;
+	private static inline var TIMEOUT:Int = 60;
 	
 	/* =======================================================================
 	Public - Run
 	========================================================================== */
 	public static function run():Void {
 		
-		_timer = new Timer(200);
+		_counter   = 0;
+		_timer     = new Timer(1000);
 		_timer.run = onLoop;
 
 	}
@@ -34,12 +37,18 @@ class TimeKeeper {
 	On Loop
 	========================================================================== */
 	private static function onLoop():Void {
-		
-		SimpleBoard.onLoop();
+
+		// SimpleBoard.onLoop();
 		Information.onLoop();
-		StarChecker.onLoop();
+		// StarChecker.onLoop();
 		ReportViewer.onLoop();
 		AutoSave.onLoop();
+
+		_counter = Manager.isFocus ? 0 : _counter + 1;
+		if (_counter == TIMEOUT) {
+			stop();
+			Manager.timeout();
+		}
 		
 	}
 	

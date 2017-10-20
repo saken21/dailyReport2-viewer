@@ -23,6 +23,7 @@ class Manager {
 	public static var visitDatetime:String;
 	public static var visitDate    :String;
 	public static var pastDate     :String;
+	public static var isFocus      :Bool;
 	
 	/* =======================================================================
 	Public - Init
@@ -41,6 +42,7 @@ class Manager {
 		Keyboard.init();
 		
 		Login.start();
+		setFocusEvent();
 
 		if (~/mode=special/g.match(Browser.location.search)) new JQuery('#all').addClass('specialmode');
 		
@@ -101,6 +103,35 @@ class Manager {
 
 		}
 		
+		/* =======================================================================
+		Public - Timeout
+		========================================================================== */
+		public static function timeout():Void {
+
+			new JQuery('#main').html('
+				<div class="wrap">
+					<p>一定時間アクセスがなかったのでタイムアウトしました。</p>
+					<a href="index.html">日報に戻る</a>
+				</div>');
+
+		}
+		
+	/* =======================================================================
+	Set Focus Event
+	========================================================================== */
+	private static function setFocusEvent():Void {
+
+		isFocus = true;
+		_jWindow.on('focus',function():Void {
+			isFocus = true;
+		});
+
+		_jWindow.on('blur',function():Void {
+			isFocus = false;
+		});
+
+	}
+		
 	/* =======================================================================
 	Load DB
 	========================================================================== */
@@ -120,7 +151,7 @@ class Manager {
 	========================================================================== */
 	private static function onLoadedDB(event:Event):Void {
 		
-		_jWindow.unbind('loadDB',onLoadedDB);
+		_jWindow.off('loadDB',onLoadedDB);
 		
 		_isLogined = true;
 
