@@ -212,7 +212,163 @@ Manager.reload = function() {
 	Manager.login();
 };
 Manager.timeout = function() {
-	$("#main").html("\n\t\t\t\t<div class=\"wrap\">\n\t\t\t\t\t<section id=\"timeout\">\n\t\t\t\t\t\t<figure>\n\t\t\t\t\t\t\t<img src=\"files/img/timeout.jpg\">\n\t\t\t\t\t\t\t<figcaption>一定時間更新がなかったのでタイムアウトしました</figcaption>\n\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t<a href=\"index.html\">日報に戻る</a>\n\t\t\t\t\t</section>\n\t\t\t\t</div>");
+	var array_0 = "01.jpg";
+	var array_1 = "02.jpg";
+	var array_2 = "03.jpg";
+	var array_3 = "04.gif";
+	var array_4 = "05.png";
+	var _g = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g.setReserved("name","01.jpg");
+	} else {
+		_g.h["name"] = "01.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g.setReserved("text","タイムアウトしました");
+	} else {
+		_g.h["text"] = "タイムアウトしました";
+	}
+	var _g1 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g1.setReserved("name","02.jpg");
+	} else {
+		_g1.h["name"] = "02.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g1.setReserved("text","タイムアウトしました");
+	} else {
+		_g1.h["text"] = "タイムアウトしました";
+	}
+	var _g2 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g2.setReserved("name","03.jpg");
+	} else {
+		_g2.h["name"] = "03.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g2.setReserved("text","タイムアウトしました");
+	} else {
+		_g2.h["text"] = "タイムアウトしました";
+	}
+	var _g3 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g3.setReserved("name","04.jpg");
+	} else {
+		_g3.h["name"] = "04.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g3.setReserved("text","タイムアウトしました");
+	} else {
+		_g3.h["text"] = "タイムアウトしました";
+	}
+	var _g4 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g4.setReserved("name","05.jpg");
+	} else {
+		_g4.h["name"] = "05.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g4.setReserved("text","タイムアウトしました");
+	} else {
+		_g4.h["text"] = "タイムアウトしました";
+	}
+	var _g5 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g5.setReserved("name","06.jpg");
+	} else {
+		_g5.h["name"] = "06.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g5.setReserved("text","タイムアウトしました");
+	} else {
+		_g5.h["text"] = "タイムアウトしました";
+	}
+	var _g6 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g6.setReserved("name","07.jpg");
+	} else {
+		_g6.h["name"] = "07.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g6.setReserved("text","タイムアウトしました");
+	} else {
+		_g6.h["text"] = "タイムアウトしました";
+	}
+	var _g7 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g7.setReserved("name","08.jpg");
+	} else {
+		_g7.h["name"] = "08.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g7.setReserved("text","タイムアウトしました");
+	} else {
+		_g7.h["text"] = "タイムアウトしました";
+	}
+	var _g8 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g8.setReserved("name","09.jpg");
+	} else {
+		_g8.h["name"] = "09.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g8.setReserved("text","タイムアウトしました");
+	} else {
+		_g8.h["text"] = "タイムアウトしました";
+	}
+	var _g9 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g9.setReserved("name","10.gif");
+	} else {
+		_g9.h["name"] = "10.gif";
+	}
+	if(__map_reserved["text"] != null) {
+		_g9.setReserved("text","がんばろう！ ヤクルト");
+	} else {
+		_g9.h["text"] = "がんばろう！ ヤクルト";
+	}
+	var _g10 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g10.setReserved("name","11.gif");
+	} else {
+		_g10.h["name"] = "11.gif";
+	}
+	if(__map_reserved["text"] != null) {
+		_g10.setReserved("text","がんばろう！ ヤクルト");
+	} else {
+		_g10.h["text"] = "がんばろう！ ヤクルト";
+	}
+	var _g11 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g11.setReserved("name","12.jpg");
+	} else {
+		_g11.h["name"] = "12.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g11.setReserved("text","名前は「わらび舞妓ちゃん」");
+	} else {
+		_g11.h["text"] = "名前は「わらび舞妓ちゃん」";
+	}
+	var _g12 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g12.setReserved("name","13.png");
+	} else {
+		_g12.h["name"] = "13.png";
+	}
+	if(__map_reserved["text"] != null) {
+		_g12.setReserved("text","Trelloのキャラクター");
+	} else {
+		_g12.h["text"] = "Trelloのキャラクター";
+	}
+	var map = [_g,_g1,_g2,_g3,_g4,_g5,_g6,_g7,_g8,_g9,_g10,_g11,_g12];
+	var num = Math.floor(Math.random() * map.length);
+	var data = map[num];
+	var _g13 = 0;
+	while(_g13 < 100) {
+		var i = _g13++;
+		console.log(Math.floor(Math.random() * map.length));
+	}
+	$("#main").html("\n\t\t\t\t<div class=\"wrap\">\n\t\t\t\t\t<div id=\"timeout\">\n\t\t\t\t\t\t<figure>\n\t\t\t\t\t\t\t<img src=\"files/img/timeout/" + (__map_reserved["name"] != null ? data.getReserved("name") : data.h["name"]) + "?171117\">\n\t\t\t\t\t\t\t<figcaption>" + (__map_reserved["text"] != null ? data.getReserved("text") : data.h["text"]) + "</figcaption>\n\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t<a href=\"index.html\">日報に戻る</a>\n\t\t\t\t\t</div>\n\t\t\t\t</div>");
 };
 Manager.setFocusEvent = function() {
 	Manager.isFocus = true;
@@ -1375,16 +1531,18 @@ utils_TimeKeeper.run = function() {
 	utils_TimeKeeper._counter = 0;
 	utils_TimeKeeper._timer = new haxe_Timer(1000);
 	utils_TimeKeeper._timer.run = utils_TimeKeeper.onLoop;
+	view_SimpleBoard.onLoop();
 };
 utils_TimeKeeper.stop = function() {
 	utils_TimeKeeper._timer.stop();
 };
 utils_TimeKeeper.onLoop = function() {
 	view_Information.onLoop();
+	view_StarChecker.onLoop();
 	view_ReportViewer.onLoop();
 	view_reportviewer_AutoSave.onLoop();
 	utils_TimeKeeper._counter = Manager.isFocus ? 0 : utils_TimeKeeper._counter + 1;
-	if(utils_TimeKeeper._counter == 60) {
+	if(utils_TimeKeeper._counter == 120) {
 		utils_TimeKeeper.stop();
 		Manager.timeout();
 	}
@@ -2906,7 +3064,7 @@ jp_saken_js_utils_Handy._window = window;
 utils_Ajax.PATH = "files/php/";
 utils_Data.DAY_LIST = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 utils_Data.UPLOAD_FOLDER = "files/upload/";
-utils_TimeKeeper.TIMEOUT = 60;
+utils_TimeKeeper.TIMEOUT = 120;
 view_Login.COOKIE_NAME = "DR2LoginHistory2";
 view_ReportViewer.TABLE_NAME = "reports";
 view_ReportViewer.LENGTH_AT_ONCE = 10;

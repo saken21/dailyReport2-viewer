@@ -11,7 +11,7 @@ class TimeKeeper {
 	
 	private static var _timer  :Timer;
 	private static var _counter:Int;
-	private static inline var TIMEOUT:Int = 60;
+	private static inline var TIMEOUT:Int = 120;
 	
 	/* =======================================================================
 	Public - Run
@@ -21,6 +21,8 @@ class TimeKeeper {
 		_counter   = 0;
 		_timer     = new Timer(1000);
 		_timer.run = onLoop;
+
+		SimpleBoard.onLoop();
 
 	}
 
@@ -40,7 +42,7 @@ class TimeKeeper {
 
 		// SimpleBoard.onLoop();
 		Information.onLoop();
-		// StarChecker.onLoop();
+		StarChecker.onLoop();
 		ReportViewer.onLoop();
 		AutoSave.onLoop();
 

@@ -979,7 +979,7 @@ h1 {
 }
 
 	#timeout img {
-		width: 340px;
+		max-width: 340px;
 	}
 
 	#timeout a {
