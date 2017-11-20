@@ -123,7 +123,8 @@ class Manager {
 				[ 'name' => '10.gif','text' => 'がんばろう！ ヤクルト' ],
 				[ 'name' => '11.gif','text' => 'がんばろう！ ヤクルト' ],
 				[ 'name' => '12.jpg','text' => '名前は「わらび舞妓ちゃん」' ],
-				[ 'name' => '13.png','text' => 'Trelloのキャラクター' ]
+				[ 'name' => '13.png','text' => 'Trelloのキャラクター' ],
+				[ 'name' => '14.jpg','text' => 'がおぁー' ]
 			];
 			var num  : Int = Math.floor( Math.random() * map.length );
 			var data : Map<String,String> = map[num];

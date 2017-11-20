@@ -360,12 +360,23 @@ Manager.timeout = function() {
 	} else {
 		_g12.h["text"] = "Trelloのキャラクター";
 	}
-	var map = [_g,_g1,_g2,_g3,_g4,_g5,_g6,_g7,_g8,_g9,_g10,_g11,_g12];
+	var _g13 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g13.setReserved("name","14.jpg");
+	} else {
+		_g13.h["name"] = "14.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g13.setReserved("text","がおぁー");
+	} else {
+		_g13.h["text"] = "がおぁー";
+	}
+	var map = [_g,_g1,_g2,_g3,_g4,_g5,_g6,_g7,_g8,_g9,_g10,_g11,_g12,_g13];
 	var num = Math.floor(Math.random() * map.length);
 	var data = map[num];
-	var _g13 = 0;
-	while(_g13 < 100) {
-		var i = _g13++;
+	var _g14 = 0;
+	while(_g14 < 100) {
+		var i = _g14++;
 		console.log(Math.floor(Math.random() * map.length));
 	}
 	$("#main").html("\n\t\t\t\t<div class=\"wrap\">\n\t\t\t\t\t<div id=\"timeout\">\n\t\t\t\t\t\t<figure>\n\t\t\t\t\t\t\t<img src=\"files/img/timeout/" + (__map_reserved["name"] != null ? data.getReserved("name") : data.h["name"]) + "?171117\">\n\t\t\t\t\t\t\t<figcaption>" + (__map_reserved["text"] != null ? data.getReserved("text") : data.h["text"]) + "</figcaption>\n\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t<a href=\"http://tpxg.graphic.co.jp/xgweb/Login.asp\" target=\"_blank\">\n\t\t\t\t\t\t\t<img src=\"files/img/timeout/timeout.gif\" alt=\"Time Pro-XG\">\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<p>残業時間の申請お忘れずに</p>\n\t\t\t\t\t\t<a href=\"index.html\">日報に戻る</a>\n\t\t\t\t\t</div>\n\t\t\t\t</div>");
