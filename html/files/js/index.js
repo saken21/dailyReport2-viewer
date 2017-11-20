@@ -368,7 +368,7 @@ Manager.timeout = function() {
 		var i = _g13++;
 		console.log(Math.floor(Math.random() * map.length));
 	}
-	$("#main").html("\n\t\t\t\t<div class=\"wrap\">\n\t\t\t\t\t<div id=\"timeout\">\n\t\t\t\t\t\t<figure>\n\t\t\t\t\t\t\t<img src=\"files/img/timeout/" + (__map_reserved["name"] != null ? data.getReserved("name") : data.h["name"]) + "?171117\">\n\t\t\t\t\t\t\t<figcaption>" + (__map_reserved["text"] != null ? data.getReserved("text") : data.h["text"]) + "</figcaption>\n\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t<a href=\"index.html\">日報に戻る</a>\n\t\t\t\t\t</div>\n\t\t\t\t</div>");
+	$("#main").html("\n\t\t\t\t<div class=\"wrap\">\n\t\t\t\t\t<div id=\"timeout\">\n\t\t\t\t\t\t<figure>\n\t\t\t\t\t\t\t<img src=\"files/img/timeout/" + (__map_reserved["name"] != null ? data.getReserved("name") : data.h["name"]) + "?171117\">\n\t\t\t\t\t\t\t<figcaption>" + (__map_reserved["text"] != null ? data.getReserved("text") : data.h["text"]) + "</figcaption>\n\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t<a href=\"http://tpxg.graphic.co.jp/xgweb/Login.asp\" target=\"_blank\">\n\t\t\t\t\t\t\t<img src=\"files/img/timeout/timeout.gif\" alt=\"Time Pro-XG\">\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<p>残業時間の申請お忘れずに</p>\n\t\t\t\t\t\t<a href=\"index.html\">日報に戻る</a>\n\t\t\t\t\t</div>\n\t\t\t\t</div>");
 };
 Manager.setFocusEvent = function() {
 	Manager.isFocus = true;

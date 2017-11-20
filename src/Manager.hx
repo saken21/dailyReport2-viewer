@@ -139,6 +139,10 @@ class Manager {
 							<img src="files/img/timeout/${data['name']}?171117">
 							<figcaption>${data['text']}</figcaption>
 						</figure>
+						<a href="http://tpxg.graphic.co.jp/xgweb/Login.asp" target="_blank">
+							<img src="files/img/timeout/timeout.gif" alt="Time Pro-XG">
+						</a>
+						<p>残業時間の申請お忘れずに</p>
 						<a href="index.html">日報に戻る</a>
 					</div>
 				</div>');
