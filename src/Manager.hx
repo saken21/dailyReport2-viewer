@@ -103,53 +103,6 @@ class Manager {
 
 		}
 		
-		/* =======================================================================
-		Public - Timeout
-		========================================================================== */
-		public static function timeout():Void {
-
-			var array : Array<String> = ['01.jpg','02.jpg','03.jpg','04.gif','05.png'];
-
-			var map : Array<Map<String,String>> = [
-				[ 'name' => '01.jpg','text' => 'タイムアウトしました' ],
-				[ 'name' => '02.jpg','text' => 'タイムアウトしました' ],
-				[ 'name' => '03.jpg','text' => 'タイムアウトしました' ],
-				[ 'name' => '04.jpg','text' => 'タイムアウトしました' ],
-				[ 'name' => '05.jpg','text' => 'タイムアウトしました' ],
-				[ 'name' => '06.jpg','text' => 'タイムアウトしました' ],
-				[ 'name' => '07.jpg','text' => 'タイムアウトしました' ],
-				[ 'name' => '08.jpg','text' => 'タイムアウトしました' ],
-				[ 'name' => '09.jpg','text' => 'タイムアウトしました' ],
-				[ 'name' => '10.gif','text' => 'がんばろう！ ヤクルト' ],
-				[ 'name' => '11.gif','text' => 'がんばろう！ ヤクルト' ],
-				[ 'name' => '12.jpg','text' => '名前は「わらび舞妓ちゃん」' ],
-				[ 'name' => '13.png','text' => 'Trelloのキャラクター' ],
-				[ 'name' => '14.jpg','text' => 'がおぁー' ]
-			];
-			var num  : Int = Math.floor( Math.random() * map.length );
-			var data : Map<String,String> = map[num];
-
-			for (i in 0 ... 100) {
-				trace(Math.floor( Math.random() * map.length ));
-			}
-
-			new JQuery('#main').html('
-				<div class="wrap">
-					<div id="timeout">
-						<figure>
-							<img src="files/img/timeout/${data['name']}?171117">
-							<figcaption>${data['text']}</figcaption>
-						</figure>
-						<a href="http://tpxg.graphic.co.jp/xgweb/Login.asp" target="_blank">
-							<img src="files/img/timeout/timeout.gif" alt="Time Pro-XG">
-						</a>
-						<p>残業時間の申請お忘れずに</p>
-						<a href="index.html">日報に戻る</a>
-					</div>
-				</div>');
-
-		}
-		
 	/* =======================================================================
 	Set Focus Event
 	========================================================================== */

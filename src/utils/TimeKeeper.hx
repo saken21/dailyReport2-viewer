@@ -5,13 +5,13 @@ import view.SimpleBoard;
 import view.Information;
 import view.StarChecker;
 import view.ReportViewer;
+import view.Timeout;
 import view.reportviewer.AutoSave;
  
 class TimeKeeper {
 	
 	private static var _timer  :Timer;
 	private static var _counter:Int;
-	private static inline var TIMEOUT:Int = 120;
 	
 	/* =======================================================================
 	Public - Run
@@ -47,9 +47,9 @@ class TimeKeeper {
 		AutoSave.onLoop();
 
 		_counter = Manager.isFocus ? 0 : _counter + 1;
-		if (_counter == TIMEOUT) {
+		if (_counter == Timeout.SECONDS) {
 			stop();
-			Manager.timeout();
+			Timeout.init();
 		}
 		
 	}
