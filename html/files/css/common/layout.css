@@ -119,6 +119,7 @@
 			
 				#header-navi ul li a {
 					display:block;
+					position: relative;
 					padding:5px 19px 5px 29px;
 					border:2px solid #ddd;
 					background:#fff no-repeat 9px center;
@@ -136,6 +137,7 @@
 					background-position:10px center;
 				}
 				
+				#header-navi ul li a.timepro,
 				#header-navi ul li a.star,
 				#header-navi ul li a.analytics {
 					padding-left:19px;
@@ -148,6 +150,10 @@
 				#header-navi ul li a.edit {
 					background-image:url(../../img/edit.png);
 				}
+				
+					#header-navi ul li a.timepro img {
+						height: 19px;
+					}
 			
 /*-------------------------------------------------------------------------
 	Bread

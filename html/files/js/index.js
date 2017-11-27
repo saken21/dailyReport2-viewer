@@ -3090,7 +3090,51 @@ view_Timeout.DATA_MAP = (function($this) {
 	} else {
 		_g14.h["text"] = "スライリー";
 	}
-	$r = [_g,_g1,_g2,_g3,_g4,_g5,_g6,_g7,_g8,_g9,_g10,_g11,_g12,_g13,_g14];
+	var _g15 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g15.setReserved("name","16.jpg");
+	} else {
+		_g15.h["name"] = "16.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g15.setReserved("text","手が震えるやつ");
+	} else {
+		_g15.h["text"] = "手が震えるやつ";
+	}
+	var _g16 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g16.setReserved("name","17.jpg");
+	} else {
+		_g16.h["name"] = "17.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g16.setReserved("text","がんばろう！ ヤクルト");
+	} else {
+		_g16.h["text"] = "がんばろう！ ヤクルト";
+	}
+	var _g17 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g17.setReserved("name","18.jpg");
+	} else {
+		_g17.h["name"] = "18.jpg";
+	}
+	if(__map_reserved["text"] != null) {
+		_g17.setReserved("text","がんばろう！ ヤクルト");
+	} else {
+		_g17.h["text"] = "がんばろう！ ヤクルト";
+	}
+	var _g18 = new haxe_ds_StringMap();
+	if(__map_reserved["name"] != null) {
+		_g18.setReserved("name","19.gif");
+	} else {
+		_g18.h["name"] = "19.gif";
+	}
+	if(__map_reserved["text"] != null) {
+		_g18.setReserved("text","がんばろう！ ヤクルト");
+	} else {
+		_g18.h["text"] = "がんばろう！ ヤクルト";
+	}
+	$r = [_g,_g1,_g2,_g3,_g4,_g5,_g6,_g7,_g8,_g9,_g10,_g11,_g12,_g13,_g14,_g15,_g16,_g17,_g18];
 	return $r;
 }(this));
 view_reportviewer_AutoSave.TABLE_NAME = "autosaves";
